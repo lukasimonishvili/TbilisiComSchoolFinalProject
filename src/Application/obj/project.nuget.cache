@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Erlk+QNL4sbDZktfgrWc9NNv3/G1vXmr6h1j6Ju5gxUFSyG7NXB+GkIOfwkh87wc5makxkPLu89705R4FKuljQ==",
+  "dgSpecHash": "yQQwexxgdgfmTh+KYRLmZGasy7Z1m7Fbe3dJ5PBgboQ5bpA2VYcRIsiknwhPqlItK1WLO3zqAVtl/RX96LdBRw==",
   "success": true,
   "projectFilePath": "C:\\Users\\simon\\Desktop\\work\\TbilisiSchoolFinalProject\\src\\Application\\Application.csproj",
   "expectedPackageFiles": [
@@ -41,6 +41,8 @@
     "C:\\Users\\simon\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
     "C:\\Users\\simon\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\simon\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
+    "C:\\Users\\simon\\.nuget\\packages\\nlog\\5.2.2\\nlog.5.2.2.nupkg.sha512",
+    "C:\\Users\\simon\\.nuget\\packages\\nlog.extensions.logging\\5.3.2\\nlog.extensions.logging.5.3.2.nupkg.sha512",
     "C:\\Users\\simon\\.nuget\\packages\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
     "C:\\Users\\simon\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
     "C:\\Users\\simon\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.6.3\\swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",

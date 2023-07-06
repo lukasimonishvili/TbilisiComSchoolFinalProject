@@ -69,3 +69,6 @@ C:\Users\simon\Desktop\work\TbilisiSchoolFinalProject\src\Application\obj\Debug\
 C:\Users\simon\Desktop\work\TbilisiSchoolFinalProject\src\Application\obj\Debug\net5.0\Application.pdb
 C:\Users\simon\Desktop\work\TbilisiSchoolFinalProject\src\Application\obj\Debug\net5.0\Application.genruntimeconfig.cache
 C:\Users\simon\Desktop\work\TbilisiSchoolFinalProject\src\Application\obj\Debug\net5.0\ref\Application.dll
+C:\Users\simon\Desktop\work\TbilisiSchoolFinalProject\src\Application\bin\Debug\net5.0\NLog.config
+C:\Users\simon\Desktop\work\TbilisiSchoolFinalProject\src\Application\bin\Debug\net5.0\NLog.dll
+C:\Users\simon\Desktop\work\TbilisiSchoolFinalProject\src\Application\bin\Debug\net5.0\NLog.Extensions.Logging.dll

@@ -2,6 +2,7 @@
 using Domain.DTO.Authentication;
 using Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 
@@ -12,10 +13,12 @@ namespace Application.Authentication.Commands
     public class Register : Controller
     {
         private readonly AuthService _authService;
+        private readonly ILogger<Register> _logger;
 
-        public Register(AuthService authService)
+        public Register(AuthService authService, ILogger<Register> logger)
         {
             _authService = authService;
+            _logger = logger;
         }
 
         [HttpPost("")]
@@ -52,6 +55,7 @@ namespace Application.Authentication.Commands
             }
             catch (Exception)
             {
+                _logger.LogInformation("karateeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
                 return Conflict("Email sender system is under maintenance. Thank you for your patience please try to register later");
             }
 
