@@ -7,15 +7,18 @@ using Infrastructure.Repositories;
 using Mapster;
 using System.Threading.Tasks;
 using Domain.Helpers;
+using Domain.Interface;
 
 namespace Infrastructure.Services
 {
-    public class AuthService
+    public class RegisterService : IRegisterService
     {
         private readonly MailerSettings _mailerSettings;
-        public AuthService(AppSettings appSettings)
+        private readonly UserRepository _userRepository;
+        public RegisterService(AppSettings appSettings, UserRepository userRepository)
         {
             _mailerSettings = appSettings.Mailer;
+            _userRepository = userRepository;
         }
 
 
@@ -26,7 +29,7 @@ namespace Infrastructure.Services
             AdapdetUser.IsBlocked = false;
             AdapdetUser.Verified = false;
             AdapdetUser.Role = Roles.User;
-            UserRepository.AddUserToDataBase(AdapdetUser);
+            _userRepository.AddUserToDataBase(AdapdetUser);
         }
 
         public Task SendRegisterConfirmationEmail(string emailAddress, string username, string url)
@@ -55,19 +58,19 @@ namespace Infrastructure.Services
 
         public User GetUserByEmail(string email)
         {
-            return UserRepository.GetUserByEmail(email);
+            return _userRepository.GetUserByEmail(email);
         }
 
         public User GetUserByUsername(string username)
         {
-            return UserRepository.GetUserByUsername(username);
+            return _userRepository.GetUserByUsername(username);
         }
 
         public void ActivateUser(User user)
         {
             var updatedUser = user;
             updatedUser.Verified = true;
-            UserRepository.UpdateUser(updatedUser);
+            _userRepository.UpdateUser(updatedUser);
         }
     }
 }

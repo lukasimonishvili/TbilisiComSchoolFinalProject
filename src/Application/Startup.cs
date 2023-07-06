@@ -13,6 +13,8 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 using NLog.Extensions.Logging;
+using Domain.Interface;
+using Infrastructure.Repositories;
 
 namespace Application
 {
@@ -66,10 +68,16 @@ namespace Application
 
             UserMapper.ConfigureMappings();
 
-            services.AddScoped<AuthService>(provider =>
+            services.AddScoped<IRegisterService>(provider =>
             {
                 var appSettings = provider.GetRequiredService<IOptions<AppSettings>>().Value;
-                return new AuthService(appSettings);
+                return new RegisterService(appSettings, new UserRepository());
+            });
+
+            services.AddScoped<ILoginService>(provider =>
+            {
+                var appSettings = provider.GetRequiredService<IOptions<AppSettings>>().Value;
+                return new LoginService(appSettings, new UserRepository());
             });
         }
 

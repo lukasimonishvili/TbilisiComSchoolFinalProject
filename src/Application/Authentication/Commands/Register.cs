@@ -1,9 +1,7 @@
 ﻿using Application.Authentication.Validators;
 using Domain.DTO.Authentication;
-using Infrastructure.Services;
+using Domain.Interface;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
 using System.Threading.Tasks;
 
 namespace Application.Authentication.Commands
@@ -12,13 +10,11 @@ namespace Application.Authentication.Commands
     [Route("/api/[Controller]")]
     public class Register : Controller
     {
-        private readonly AuthService _authService;
-        private readonly ILogger<Register> _logger;
+        private readonly IRegisterService _registerService;
 
-        public Register(AuthService authService, ILogger<Register> logger)
+        public Register(IRegisterService registerService)
         {
-            _authService = authService;
-            _logger = logger;
+            _registerService = registerService;
         }
 
         [HttpPost("")]
@@ -32,13 +28,13 @@ namespace Application.Authentication.Commands
             }
 
 
-            var DBuser = _authService.GetUserByEmail(user.Email);
+            var DBuser = _registerService.GetUserByEmail(user.Email);
             if (DBuser != null)
             {
                 return Conflict($"User user with email - {user.Email} already exists");
             }
 
-            DBuser = _authService.GetUserByUsername(user.Username);
+            DBuser = _registerService.GetUserByUsername(user.Username);
             if (DBuser != null)
             {
                 return Conflict($"User with username {user.Username} already exists");
@@ -49,13 +45,12 @@ namespace Application.Authentication.Commands
             {
                 var port = Request.Host.Port.HasValue ? $":{Request.Host.Port.Value}" : "";
                 var emailActivateUrl = $"{Request.Scheme}://{Request.Host.Host}{port}/api/confirm-registration?email={user.Email}";
-                await _authService.SendRegisterConfirmationEmail(user.Email, user.Username, emailActivateUrl);
-                _authService.RegisterUser(user);
+                await _registerService.SendRegisterConfirmationEmail(user.Email, user.Username, emailActivateUrl);
+                _registerService.RegisterUser(user);
                 return Ok($"check your email: {user.Email} to confirm registration");
             }
-            catch (Exception)
+            catch
             {
-                _logger.LogInformation("karateeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
                 return Conflict("Email sender system is under maintenance. Thank you for your patience please try to register later");
             }
         }
@@ -63,7 +58,7 @@ namespace Application.Authentication.Commands
         [HttpGet("/api/confirm-registration")]
         public IActionResult ConfirmRegistration([FromQuery] string email)
         {
-            var user = _authService.GetUserByEmail(email);
+            var user = _registerService.GetUserByEmail(email);
 
             if (user == null)
             {
@@ -75,7 +70,7 @@ namespace Application.Authentication.Commands
                 return Conflict($"user with email address - {email} is already activated");
             }
 
-            _authService.ActivateUser(user);
+            _registerService.ActivateUser(user);
             return Ok($"Your account is now activated");
         }
     }
