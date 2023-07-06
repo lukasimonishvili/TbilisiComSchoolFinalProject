@@ -62,5 +62,12 @@ namespace Infrastructure.Services
         {
             return UserRepository.GetUserByUsername(username);
         }
+
+        public void ActivateUser(User user)
+        {
+            var updatedUser = user;
+            updatedUser.Verified = true;
+            UserRepository.UpdateUser(updatedUser);
+        }
     }
 }

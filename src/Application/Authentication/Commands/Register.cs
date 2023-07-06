@@ -58,8 +58,26 @@ namespace Application.Authentication.Commands
                 _logger.LogInformation("karateeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
                 return Conflict("Email sender system is under maintenance. Thank you for your patience please try to register later");
             }
+        }
 
+        [HttpGet("/api/confirm-registration")]
+        public IActionResult ConfirmRegistration([FromQuery] string email)
+        {
+            var user = _authService.GetUserByEmail(email);
 
+            if (user == null)
+            {
+                return NotFound($"user with email address - {email} not found in system");
+            }
+
+            if (user.Verified)
+            {
+                return Conflict($"user with email address - {email} is already activated");
+            }
+
+            _authService.ActivateUser(user);
+            return Ok($"Your account is now activated");
         }
     }
+
 }

@@ -23,6 +23,14 @@ namespace Infrastructure.Repositories
         {
             return _context.Users.FirstOrDefault(u => u.Username == username);
         }
+
+        public static void UpdateUser(User newUser)
+        {
+            var oldUser = _context.Users.FirstOrDefault(u => u.Id == newUser.Id);
+            _context.Entry(oldUser).CurrentValues.SetValues(newUser);
+            _context.SaveChanges();
+        }
+
     }
 }
 
