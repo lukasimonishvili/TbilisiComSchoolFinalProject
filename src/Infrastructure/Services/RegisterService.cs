@@ -3,22 +3,24 @@ using System.Net;
 using System.Net.Mail;
 using Domain.DTO.Authentication;
 using Domain.Entities;
-using Infrastructure.Repositories;
 using Mapster;
 using System.Threading.Tasks;
 using Domain.Helpers;
 using Domain.Interface;
+using Microsoft.Extensions.Logging;
 
 namespace Infrastructure.Services
 {
     public class RegisterService : IRegisterService
     {
         private readonly MailerSettings _mailerSettings;
-        private readonly UserRepository _userRepository;
-        public RegisterService(AppSettings appSettings, UserRepository userRepository)
+        private readonly IUserRepository _userRepository;
+        private readonly ILogger<IRegisterService> _logger;
+        public RegisterService(AppSettings appSettings, IUserRepository userRepository, ILogger<IRegisterService> logger)
         {
             _mailerSettings = appSettings.Mailer;
             _userRepository = userRepository;
+            _logger = logger;
         }
 
 
@@ -30,6 +32,7 @@ namespace Infrastructure.Services
             AdapdetUser.Verified = false;
             AdapdetUser.Role = Roles.User;
             _userRepository.AddUserToDataBase(AdapdetUser);
+            _logger.LogInformation($"New user with email address: {registerDto.Email} added to system");
         }
 
         public Task SendRegisterConfirmationEmail(string emailAddress, string username, string url)
@@ -51,7 +54,6 @@ namespace Infrastructure.Services
                 UseDefaultCredentials = false,
                 Credentials = new NetworkCredential(_mailerSettings.Sender, _mailerSettings.Password)
             };
-
             return client.SendMailAsync(mailMessage);
         }
 

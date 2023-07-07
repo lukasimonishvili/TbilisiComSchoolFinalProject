@@ -1,9 +1,11 @@
 ﻿using Domain.DTO.Authentication;
 using Domain.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Application.Authentication.Commands
 {
+    [Authorize]
     [ApiController]
     [Route("/api/[Controller]")]
     public class Login : Controller
@@ -15,6 +17,7 @@ namespace Application.Authentication.Commands
             _loginService = loginService;
         }
 
+        [AllowAnonymous]
         [HttpPost("")]
         public IActionResult Authenticate([FromBody] LoginDTO loginDto)
         {
@@ -33,6 +36,7 @@ namespace Application.Authentication.Commands
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpPost("/api/refresh-token")]
         public IActionResult RefreshToken([FromBody] RefreshTokenDTO data)
         {
@@ -49,6 +53,21 @@ namespace Application.Authentication.Commands
             }
 
             return Ok(refreshToken);
+        }
+
+        [HttpGet("/api/GetUserById/{id}")]
+        public IActionResult GetUserById(int id)
+        {
+            string authorizationHeader = HttpContext.Request.Headers["Authorization"];
+            var result = _loginService.GetUserById(id, authorizationHeader);
+
+            if (result == null)
+            {
+                return Unauthorized("You dont have permission to retrieve this data");
+
+            }
+
+            return Ok(result);
         }
     }
 }

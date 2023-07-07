@@ -13,11 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Cars\Commands\" />
-    <Folder Include="Cars\Queries\" />
-  </ItemGroup>
-
-  <ItemGroup>
 	  <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
   </ItemGroup>
 

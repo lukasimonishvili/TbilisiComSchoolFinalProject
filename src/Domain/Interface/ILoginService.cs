@@ -6,5 +6,6 @@ namespace Domain.Interface
     {
         string Authenticate(LoginDTO login);
         string RefreshToken(string tokenString);
+        UserDTO GetUserById(int userId, string authorizationHeader);
     }
 }

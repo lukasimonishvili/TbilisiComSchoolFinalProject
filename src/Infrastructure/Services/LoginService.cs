@@ -9,19 +9,22 @@ using System.Text;
 using System;
 using Domain.Entities;
 using Domain.Helpers;
-using Infrastructure.Repositories;
 using System.Linq;
+using Microsoft.Extensions.Logging;
+using Mapster;
 
 namespace Infrastructure.Services
 {
     public class LoginService : ILoginService
     {
         private readonly AppSettings _appSettings;
-        private readonly UserRepository _userRepository;
-        public LoginService(AppSettings appSettings, UserRepository userRepository)
+        private readonly IUserRepository _userRepository;
+        private readonly ILogger<ILoginService> _logger;
+        public LoginService(AppSettings appSettings, IUserRepository userRepository, ILogger<ILoginService> logger)
         {
             _appSettings = appSettings;
             _userRepository = userRepository;
+            _logger = logger;
         }
 
 
@@ -31,16 +34,20 @@ namespace Infrastructure.Services
 
             if (user == null)
             {
+                _logger.LogInformation("Attempted to authenticate with incorrect username");
                 return null;
             }
 
             if (!BCryptNet.Verify(login.Password, user.Password))
             {
+                _logger.LogWarning($"attemt to authenticate with username {login.Username} failed because of wrong password");
                 return null;
+
             }
 
             if (!user.Verified)
             {
+                _logger.LogInformation($"user with username {login.Username} successfully authenticated");
                 return "Unverified";
             }
             return GenerateToken(user);
@@ -58,7 +65,8 @@ namespace Infrastructure.Services
                     new Claim("FirstName", user.FirstName),
                     new Claim("LastName", user.LastName),
                     new Claim("Email", user.Email),
-                    new Claim("Role", user.Role)
+                    new Claim("Role", user.Role),
+                    new Claim("IsBlocked", user.IsBlocked.ToString()),
                 }),
                 Expires = DateTime.UtcNow.AddDays(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
@@ -66,16 +74,6 @@ namespace Infrastructure.Services
             var token = tokenHandler.CreateToken(tokenDescriptor);
             var tokenString = tokenHandler.WriteToken(token);
             return tokenString;
-        }
-
-        private bool IsTokenExpired(string token)
-        {
-            var jwtTokenHandler = new JwtSecurityTokenHandler();
-            var decodedToken = jwtTokenHandler.ReadJwtToken(token);
-            var expirationDate = decodedToken.ValidTo;
-            var currentTime = DateTime.UtcNow;
-
-            return expirationDate <= currentTime;
         }
 
         public string RefreshToken(string tokenString)
@@ -86,7 +84,7 @@ namespace Infrastructure.Services
                 var token = tokenHandler.ReadJwtToken(tokenString);
                 var uniqueNameClaim = token.Claims.FirstOrDefault(claim => claim.Type == "unique_name");
 
-                if (!IsTokenExpired(tokenString))
+                if (DateTime.UtcNow > token.ValidTo)
                 {
                     return "Valid";
                 }
@@ -96,12 +94,28 @@ namespace Infrastructure.Services
                     return GenerateToken(userDB);
                 }
             }
-            catch
+            catch (ArgumentException ex)
+            {
+                _logger.LogError(ex.Message);
+                _logger.LogError(ex.StackTrace);
+                return null;
+            }
+        }
+
+        public UserDTO GetUserById(int userId, string authorizationHeader)
+        {
+            string tokenString = authorizationHeader.Substring("Bearer ".Length).Trim();
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var token = tokenHandler.ReadJwtToken(tokenString);
+            var uniqueNameClaim = token.Claims.FirstOrDefault(claim => claim.Type == "unique_name");
+            var roleClaim = token.Claims.FirstOrDefault(claim => claim.Type == "Role");
+
+            if (roleClaim.Value == Roles.User && Convert.ToInt32(uniqueNameClaim.Value) != userId)
             {
                 return null;
             }
 
-
+            return _userRepository.GetUserById(userId).Adapt<UserDTO>();
         }
     }
 }

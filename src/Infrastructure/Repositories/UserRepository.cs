@@ -1,10 +1,11 @@
 ﻿using Domain.Entities;
+using Domain.Interface;
 using Infrastructure.Persistence;
 using System.Linq;
 
 namespace Infrastructure.Repositories
 {
-    public class UserRepository
+    public class UserRepository : IUserRepository
     {
         private readonly static DataBaseContext _context = new();
 

@@ -67,17 +67,26 @@ namespace Application
                    });
 
             UserMapper.ConfigureMappings();
+            LoanMapper.ConfigureMappings();
 
             services.AddScoped<IRegisterService>(provider =>
             {
                 var appSettings = provider.GetRequiredService<IOptions<AppSettings>>().Value;
-                return new RegisterService(appSettings, new UserRepository());
+                var logger = provider.GetRequiredService<ILogger<IRegisterService>>();
+                return new RegisterService(appSettings, new UserRepository(), logger);
             });
 
             services.AddScoped<ILoginService>(provider =>
             {
                 var appSettings = provider.GetRequiredService<IOptions<AppSettings>>().Value;
-                return new LoginService(appSettings, new UserRepository());
+                var logger = provider.GetRequiredService<ILogger<ILoginService>>();
+                return new LoginService(appSettings, new UserRepository(), logger);
+            });
+
+            services.AddScoped<ILoanService>(Provider =>
+            {
+                var logger = Provider.GetService<ILogger<ILoanService>>();
+                return new LoanService(new LoanRepository(), logger);
             });
         }
 

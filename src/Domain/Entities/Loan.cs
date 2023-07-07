@@ -24,5 +24,4 @@
         public static string Accepted = "Accepted";
         public static string Denied = "Denied";
     }
-
 }

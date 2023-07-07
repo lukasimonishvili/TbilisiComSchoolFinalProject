@@ -1,17 +1,17 @@
-﻿using Domain.DTO.Authentication;
+﻿using Domain.DTO.Loan;
 using Domain.Entities;
 using Mapster;
 
 namespace Infrastructure.Maps
 {
-    public static class UserMapper
+    public class LoanMapper
     {
         public static void ConfigureMappings()
         {
-            TypeAdapterConfig<RegisterDTO, User>
+            TypeAdapterConfig<LoanRequestDTO, Loan>
                 .NewConfig();
 
-            TypeAdapterConfig<User, UserDTO>
+            TypeAdapterConfig<Loan, LoanDTO>
                 .NewConfig();
         }
     }
