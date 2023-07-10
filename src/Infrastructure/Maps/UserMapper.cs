@@ -13,6 +13,9 @@ namespace Infrastructure.Maps
 
             TypeAdapterConfig<User, UserDTO>
                 .NewConfig();
+
+            TypeAdapterConfig<UserAccountantDTO, User>
+                .NewConfig();
         }
     }
 }

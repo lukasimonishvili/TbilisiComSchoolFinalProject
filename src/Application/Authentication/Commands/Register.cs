@@ -31,7 +31,6 @@ namespace Application.Authentication.Commands
                 return BadRequest(message);
             }
 
-
             var DBuser = _registerService.GetUserByEmail(user.Email);
             if (DBuser != null)
             {

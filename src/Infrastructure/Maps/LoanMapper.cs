@@ -13,6 +13,9 @@ namespace Infrastructure.Maps
 
             TypeAdapterConfig<Loan, LoanDTO>
                 .NewConfig();
+
+            TypeAdapterConfig<LoanAccountantDTO, Loan>
+                .NewConfig()
         }
     }
 }

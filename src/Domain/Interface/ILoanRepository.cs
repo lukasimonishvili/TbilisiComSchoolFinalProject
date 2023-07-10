@@ -9,5 +9,6 @@ namespace Domain.Interface
         List<Loan> GetLoansByUsrId(int userId);
         void DeleteLoan(Loan loan);
         Loan GetLoanById(int loanId);
+        void UpdateLoan(Loan newLoan);
     }
 }

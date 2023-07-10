@@ -88,6 +88,12 @@ namespace Application
                 var logger = Provider.GetService<ILogger<ILoanService>>();
                 return new LoanService(new LoanRepository(), logger);
             });
+
+            services.AddScoped<IAccountantService>(Provider =>
+            {
+                var logger = Provider.GetService<ILogger<IAccountantService>>();
+                return new AccountantService(new UserRepository(), new LoanRepository(), logger);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -31,5 +31,12 @@ namespace Infrastructure.Repositories
         {
             return _context.Loans.Where(x => x.UserId == userId).ToList();
         }
+
+        public void UpdateLoan(Loan newLoan)
+        {
+            var oldLoan = _context.Loans.FirstOrDefault(l => l.Id == newLoan.Id);
+            _context.Entry(oldLoan).CurrentValues.SetValues(newLoan);
+            _context.SaveChanges();
+        }
     }
 }

@@ -112,9 +112,11 @@ namespace Infrastructure.Services
 
             if (roleClaim.Value == Roles.User && Convert.ToInt32(uniqueNameClaim.Value) != userId)
             {
+                _logger.LogWarning($"user with Id {uniqueNameClaim.Value} attempted to access information about user with id {userId}");
                 return null;
             }
 
+            _logger.LogInformation($"data abaout user with id {userId} retrieved by user with id {uniqueNameClaim.Value}");
             return _userRepository.GetUserById(userId).Adapt<UserDTO>();
         }
     }

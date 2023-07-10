@@ -68,12 +68,48 @@ namespace Application.Loans.Commands
                 return Unauthorized("You dont have permission to delete this loan");
             }
 
+            if (result == "notFound")
+            {
+                return NotFound($"loan with id {id} not found in system");
+            }
+
             if (result == "StatusFail")
             {
                 return BadRequest("You cant delete confirmed or rejected loans");
             }
 
             return Ok("Loan deleted successfully");
+        }
+
+        [HttpPut("Update/{id}")]
+        public IActionResult UpdateLoan([FromBody] LoanRequestDTO loanRequestDTO, int id)
+        {
+            var validator = new LoanRequestValidator().Validate(loanRequestDTO);
+            if (!validator.IsValid)
+            {
+                var message = validator.Errors.Count > 1 ? "More then 1 validation error detected" : validator.Errors[0].ErrorMessage;
+                return BadRequest(message);
+            }
+
+            string authorizationHeader = HttpContext.Request.Headers["Authorization"];
+            var result = _loanService.UpdateLoan(id, loanRequestDTO, authorizationHeader);
+
+            if (result == null)
+            {
+                return Unauthorized("You dont have permission to update this loan");
+            }
+
+            if (result == "notFound")
+            {
+                return NotFound($"loan with id {id} not found in system");
+            }
+
+            if (result == "StatusFail")
+            {
+                return BadRequest("You cant update confirmed or rejected loans");
+            }
+
+            return Ok("Loan updated successfully");
         }
     }
 }
