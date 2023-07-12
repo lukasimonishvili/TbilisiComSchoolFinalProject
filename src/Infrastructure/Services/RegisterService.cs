@@ -1,31 +1,49 @@
 ﻿using BCryptNet = BCrypt.Net.BCrypt;
-using System.Net;
-using System.Net.Mail;
 using Domain.DTO.Authentication;
 using Domain.Entities;
 using Mapster;
-using System.Threading.Tasks;
-using Domain.Helpers;
 using Domain.Interface;
 using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 
 namespace Infrastructure.Services
 {
     public class RegisterService : IRegisterService
     {
-        private readonly MailerSettings _mailerSettings;
+        private readonly IEmailService _emailInterface;
         private readonly IUserRepository _userRepository;
         private readonly ILogger<IRegisterService> _logger;
-        public RegisterService(AppSettings appSettings, IUserRepository userRepository, ILogger<IRegisterService> logger)
+        public RegisterService(IEmailService emailInterface, IUserRepository userRepository, ILogger<IRegisterService> logger)
         {
-            _mailerSettings = appSettings.Mailer;
+            _emailInterface = emailInterface;
             _userRepository = userRepository;
             _logger = logger;
         }
 
 
-        public void RegisterUser(RegisterDTO registerDto)
+
+        public async Task<string> RegisterUser(RegisterDTO registerDto, string url)
         {
+            var userWithEmail = _userRepository.GetUserByEmail(registerDto.Email);
+            if (userWithEmail != null)
+            {
+                return "EmailConflict";
+            }
+
+            var userWithUsername = _userRepository.GetUserByUsername(registerDto.Username);
+            if (userWithUsername != null)
+            {
+                return "usernameConflict";
+            }
+
+            var emailSendUrl = url + registerDto.Email;
+            var emailSent = await _emailInterface.SenEmail(registerDto.Email, registerDto.Username, emailSendUrl);
+
+            if (emailSent == null)
+            {
+                return "senderError";
+            }
+
             var AdapdetUser = registerDto.Adapt<User>();
             AdapdetUser.Password = BCryptNet.HashPassword(AdapdetUser.Password);
             AdapdetUser.IsBlocked = false;
@@ -33,46 +51,25 @@ namespace Infrastructure.Services
             AdapdetUser.Role = Roles.User;
             _userRepository.AddUserToDataBase(AdapdetUser);
             _logger.LogInformation($"New user with email address: {registerDto.Email} added to system");
+            return emailSent;
         }
 
-        public Task SendRegisterConfirmationEmail(string emailAddress, string username, string url)
+        public string ActivateUser(string Email)
         {
-            var mailMessage = new MailMessage();
-            mailMessage.From = new MailAddress(_mailerSettings.Sender);
-            mailMessage.To.Add(new MailAddress(emailAddress));
-            mailMessage.Subject = "Register confirmation";
-            mailMessage.Body = $"<h1>Thank you dear {username}!</h1>" +
-                          "<p>You are 1 step close to finish registration process</P>" +
-                          "<p>To finish up registration please follow link bellow</p>" +
-                          $"<a href='{url}'>Click Here</a>";
-            mailMessage.IsBodyHtml = true;
-
-            var client = new SmtpClient(_mailerSettings.Host)
+            var user = _userRepository.GetUserByEmail(Email);
+            if (user == null)
             {
-                Port = _mailerSettings.Port,
-                EnableSsl = true,
-                UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(_mailerSettings.Sender, _mailerSettings.Password)
-            };
-            return client.SendMailAsync(mailMessage);
-        }
+                return "notFound";
+            }
 
+            if (user.Verified)
+            {
+                return "Verified";
+            }
 
-        public User GetUserByEmail(string email)
-        {
-            return _userRepository.GetUserByEmail(email);
-        }
-
-        public User GetUserByUsername(string username)
-        {
-            return _userRepository.GetUserByUsername(username);
-        }
-
-        public void ActivateUser(User user)
-        {
-            var updatedUser = user;
-            updatedUser.Verified = true;
-            _userRepository.UpdateUser(updatedUser);
+            user.Verified = true;
+            _userRepository.UpdateUser(user);
+            return "success";
         }
     }
 }

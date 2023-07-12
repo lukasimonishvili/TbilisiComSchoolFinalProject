@@ -42,7 +42,6 @@ namespace Infrastructure.Services
             {
                 _logger.LogWarning($"attemt to authenticate with username {login.Username} failed because of wrong password");
                 return null;
-
             }
 
             if (!user.Verified)
@@ -104,9 +103,9 @@ namespace Infrastructure.Services
             }
         }
 
-        public UserDTO GetUserById(int userId, string authorizationHeader)
+        public UserDTO GetUserById(int userId, string authorizationHeader, bool IsTest = false)
         {
-            string tokenString = authorizationHeader.Substring("Bearer ".Length).Trim();
+            string tokenString = IsTest ? authorizationHeader : authorizationHeader.Substring("Bearer ".Length).Trim();
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.ReadJwtToken(tokenString);
             var uniqueNameClaim = token.Claims.FirstOrDefault(claim => claim.Type == "unique_name");
@@ -117,6 +116,8 @@ namespace Infrastructure.Services
                 _logger.LogWarning($"user with Id {uniqueNameClaim.Value} attempted to access information about user with id {userId}");
                 return null;
             }
+
+            var user = _userRepository.GetUserById(userId);
 
             _logger.LogInformation($"data abaout user with id {userId} retrieved by user with id {uniqueNameClaim.Value}");
             return _userRepository.GetUserById(userId).Adapt<UserDTO>();

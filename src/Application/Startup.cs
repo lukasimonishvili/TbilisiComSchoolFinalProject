@@ -73,7 +73,8 @@ namespace Application
             {
                 var appSettings = provider.GetRequiredService<IOptions<AppSettings>>().Value;
                 var logger = provider.GetRequiredService<ILogger<IRegisterService>>();
-                return new RegisterService(appSettings, new UserRepository(), logger);
+                var emailService = new EmailService(appSettings);
+                return new RegisterService(emailService, new UserRepository(), logger);
             });
 
             services.AddScoped<ILoginService>(provider =>

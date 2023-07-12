@@ -9,10 +9,11 @@ namespace Infrastructure.Repositories
     {
         private readonly static DataBaseContext _context = new();
 
-        public void AddUserToDataBase(User user)
+        public User AddUserToDataBase(User user)
         {
             _context.Users.Add(user);
             _context.SaveChanges();
+            return user;
         }
 
         public User GetUserByEmail(string email)
@@ -30,11 +31,13 @@ namespace Infrastructure.Repositories
             return _context.Users.FirstOrDefault(u => u.Id == id);
         }
 
-        public void UpdateUser(User newUser)
+        public string UpdateUser(User newUser)
         {
             var oldUser = _context.Users.FirstOrDefault(u => u.Id == newUser.Id);
             _context.Entry(oldUser).CurrentValues.SetValues(newUser);
             _context.SaveChanges();
+
+            return "success";
         }
 
     }
