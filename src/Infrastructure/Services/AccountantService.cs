@@ -22,9 +22,9 @@ namespace Infrastructure.Services
             _logger = logger;
         }
 
-        public string UpdateLoan(int loanId, LoanAccountantDTO loanDto, string authorizationHeader)
+        public string UpdateLoan(int loanId, LoanAccountantDTO loanDto, string authorizationHeader, bool IsTest = false)
         {
-            string tokenString = authorizationHeader.Substring("Bearer ".Length).Trim();
+            string tokenString = IsTest ? authorizationHeader : authorizationHeader.Substring("Bearer ".Length).Trim();
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.ReadJwtToken(tokenString);
             var roleClaim = token.Claims.FirstOrDefault(claim => claim.Type == "Role");
@@ -49,9 +49,9 @@ namespace Infrastructure.Services
             return "success";
         }
 
-        public string UpdateUser(int userId, UserAccountantDTO userDto, string authorizationHeader)
+        public string UpdateUser(int userId, UserAccountantDTO userDto, string authorizationHeader, bool IsTest = false)
         {
-            string tokenString = authorizationHeader.Substring("Bearer ".Length).Trim();
+            string tokenString = IsTest ? authorizationHeader : authorizationHeader.Substring("Bearer ".Length).Trim();
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.ReadJwtToken(tokenString);
             var roleClaim = token.Claims.FirstOrDefault(claim => claim.Type == "Role");

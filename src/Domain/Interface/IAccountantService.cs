@@ -5,7 +5,7 @@ namespace Domain.Interface
 {
     public interface IAccountantService
     {
-        string UpdateUser(int userId, UserAccountantDTO user, string authorizationHeader);
-        string UpdateLoan(int loanId, LoanAccountantDTO loanDto, string authorizationHeader);
+        string UpdateUser(int userId, UserAccountantDTO user, string authorizationHeader, bool IsTest = false);
+        string UpdateLoan(int loanId, LoanAccountantDTO loanDto, string authorizationHeader, bool IsTest = false);
     }
 }

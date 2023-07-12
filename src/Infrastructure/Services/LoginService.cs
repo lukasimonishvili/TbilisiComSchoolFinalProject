@@ -47,9 +47,11 @@ namespace Infrastructure.Services
 
             if (!user.Verified)
             {
-                _logger.LogInformation($"user with username {login.Username} successfully authenticated");
+                _logger.LogInformation($"Unverified user with id {user.Id} tried to authenticate");
                 return "Unverified";
             }
+
+            _logger.LogInformation($"user with username {login.Username} successfully authenticated");
             return GenerateToken(user);
         }
 

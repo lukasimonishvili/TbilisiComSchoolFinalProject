@@ -21,9 +21,9 @@ namespace Infrastructure.Services
             _logger = logger;
         }
 
-        public string DeleteLoanById(int loanId, string authorizationHeader)
+        public string DeleteLoanById(int loanId, string authorizationHeader, bool IsTest = false)
         {
-            string tokenString = authorizationHeader.Substring("Bearer ".Length).Trim();
+            string tokenString = IsTest ? authorizationHeader : authorizationHeader.Substring("Bearer ".Length).Trim();
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.ReadJwtToken(tokenString);
             var roleClaim = token.Claims.FirstOrDefault(claim => claim.Type == "Role");
@@ -56,9 +56,9 @@ namespace Infrastructure.Services
             return "Success";
         }
 
-        public List<LoanDTO> GetLoansByUserId(int userId, string authorizationHeader)
+        public List<LoanDTO> GetLoansByUserId(int userId, string authorizationHeader, bool IsTest = false)
         {
-            string tokenString = authorizationHeader.Substring("Bearer ".Length).Trim();
+            string tokenString = IsTest ? authorizationHeader : authorizationHeader.Substring("Bearer ".Length).Trim();
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.ReadJwtToken(tokenString);
             var roleClaim = token.Claims.FirstOrDefault(claim => claim.Type == "Role");
@@ -74,11 +74,11 @@ namespace Infrastructure.Services
             return adapdetLoanList;
         }
 
-        public string RequestLoan(LoanRequestDTO requestDTO, string authorizationHeader)
+        public string RequestLoan(LoanRequestDTO requestDTO, string authorizationHeader, bool IsTest = false)
         {
             try
             {
-                string tokenString = authorizationHeader.Substring("Bearer ".Length).Trim();
+                string tokenString = IsTest ? authorizationHeader : authorizationHeader.Substring("Bearer ".Length).Trim();
                 var tokenHandler = new JwtSecurityTokenHandler();
                 var token = tokenHandler.ReadJwtToken(tokenString);
                 var IsBlockedClaim = token.Claims.FirstOrDefault(claim => claim.Type == "IsBlocked");
@@ -106,9 +106,9 @@ namespace Infrastructure.Services
             }
         }
 
-        public string UpdateLoan(int loanId, LoanRequestDTO loanDTO, string authorizationHeader)
+        public string UpdateLoan(int loanId, LoanRequestDTO loanDTO, string authorizationHeader, bool IsTest)
         {
-            string tokenString = authorizationHeader.Substring("Bearer ".Length).Trim();
+            string tokenString = IsTest ? authorizationHeader : authorizationHeader.Substring("Bearer ".Length).Trim();
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.ReadJwtToken(tokenString);
             var roleClaim = token.Claims.FirstOrDefault(claim => claim.Type == "Role");
@@ -126,7 +126,7 @@ namespace Infrastructure.Services
                 return null;
             }
 
-            if (oldLoan.Status != LoanStatuses.Pending)
+            if (roleClaim.Value == Roles.User && oldLoan.Status != LoanStatuses.Pending)
             {
                 _logger.LogInformation($"updating loan with id {loanId} failed because it`s status is not pending anmore");
                 return "statusFail";
