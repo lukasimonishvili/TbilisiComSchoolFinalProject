@@ -2,8 +2,10 @@
 using Domain.DTO.Loan;
 using Domain.Entities;
 using Domain.Interface;
+using Infrastructure.Exceptions;
 using Mapster;
 using Microsoft.Extensions.Logging;
+using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 
@@ -33,13 +35,13 @@ namespace Infrastructure.Services
             if (roleClaim.Value != Roles.Accountant)
             {
                 _logger.LogWarning($"none admin user with id {uniqueNameClaim.Value} attempted to update loan data");
-                return null;
+                throw new UnauthorizedAccessException("Permision denied");
             }
 
             var oldLoan = _loanRepository.GetLoanById(loanId);
             if (oldLoan == null)
             {
-                return "notFound";
+                throw new DataNotFoundException($"loan with id {loanId} not found in system");
             }
 
             var newLoan = loanDto.Adapt<Loan>();
@@ -60,13 +62,13 @@ namespace Infrastructure.Services
             if (roleClaim.Value != Roles.Accountant)
             {
                 _logger.LogWarning($"none admin user with id {uniqueNameClaim.Value} attempted to update user data");
-                return null;
+                throw new UnauthorizedAccessException("Permision denied");
             }
 
             var oldUser = _userRepository.GetUserById(userId);
             if (oldUser == null)
             {
-                return "notFound";
+                throw new DataNotFoundException($"loan with id {userId} not found in system");
             }
 
             var newUser = userDto.Adapt<User>();

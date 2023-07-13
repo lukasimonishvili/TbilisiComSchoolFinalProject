@@ -1,8 +1,10 @@
 ﻿using Application.Authentication.Validators;
 using Domain.DTO.Authentication;
 using Domain.Interface;
+using Infrastructure.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Net.Mail;
 using System.Threading.Tasks;
 
 namespace Application.Authentication.Commands
@@ -29,47 +31,43 @@ namespace Application.Authentication.Commands
                 var message = validator.Errors.Count > 1 ? "More then 1 validation error detected" : validator.Errors[0].ErrorMessage;
                 return BadRequest(message);
             }
-            var port = Request.Host.Port.HasValue ? $":{Request.Host.Port.Value}" : "";
-            var emailActivateUrl = $"{Request.Scheme}://{Request.Host.Host}{port}/api/confirm-registration?email=";
-            var result = await _registerService.RegisterUser(user, emailActivateUrl);
 
-            if (result == "usernameConflict")
+            try
             {
-                return Conflict($"user with username {user.Username} already exists");
+                var port = Request.Host.Port.HasValue ? $":{Request.Host.Port.Value}" : "";
+                var emailActivateUrl = $"{Request.Scheme}://{Request.Host.Host}{port}/api/confirm-registration?email=";
+                var result = await _registerService.RegisterUser(user, emailActivateUrl);
+                return Ok(result);
+
             }
-
-
-            if (result == "EmailConflict")
+            catch (SmtpException)
             {
-                return Conflict($"user with email {user.Email} already exists");
-            }
 
-            if (result == "senderError")
-            {
                 return Conflict($"email sender is under maintenance. please try to register later");
             }
-
-            return Ok(result);
-
+            catch (UserExistsException ex)
+            {
+                return Conflict(ex.Message);
+            }
         }
 
         [HttpGet("/api/confirm-registration")]
         public IActionResult ConfirmRegistration([FromQuery] string email)
         {
-
-            var result = _registerService.ActivateUser(email);
-
-            if (result == "notFound")
+            try
             {
-                return NotFound($"user with email {email} not found in system");
-            }
+                _registerService.ActivateUser(email);
+                return Ok($"Your account is now activated");
 
-            if (result == "Verified")
+            }
+            catch (DataNotFoundException ex)
             {
-                return Conflict("Your account is already verified");
+                return NotFound(ex.Message);
             }
-
-            return Ok($"Your account is now activated");
+            catch (UserIsAlreadyVerifiedException ex)
+            {
+                return Conflict(ex.Message);
+            }
         }
     }
 

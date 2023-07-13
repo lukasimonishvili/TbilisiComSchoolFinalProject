@@ -9,6 +9,8 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.Logging;
 using Domain.Entities;
 using Domain.DTO.Authentication;
+using System;
+using Infrastructure.Exceptions;
 
 namespace UnitTests
 {
@@ -31,25 +33,23 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void UpdateLoan_NotAccoutant_ReturnNull()
+        [ExpectedException(typeof(UnauthorizedAccessException))]
+        public void UpdateLoan_NotAccoutant()
         {
             SetUpTestLoanData();
 
             var accountantService = new AccountantService(_mockUserRepo.Object, _mockLoanRepo.Object, _mockLogger.Object);
-            var response = accountantService.UpdateLoan(1, new LoanAccountantDTO() { }, GetToken(isAccoutant: false), true);
-
-            Assert.IsNull(response);
+            accountantService.UpdateLoan(1, new LoanAccountantDTO() { }, GetToken(isAccoutant: false), true);
         }
 
         [TestMethod]
+        [ExpectedException(typeof(DataNotFoundException))]
         public void UpdateLoan_LoanNotFound_ReturnNotFound()
         {
             SetUpTestLoanData(isLoanNull: true);
 
             var accountantService = new AccountantService(_mockUserRepo.Object, _mockLoanRepo.Object, _mockLogger.Object);
-            var response = accountantService.UpdateLoan(1, new LoanAccountantDTO() { }, GetToken(), true);
-
-            Assert.AreEqual("notFound", response);
+            accountantService.UpdateLoan(1, new LoanAccountantDTO() { }, GetToken(), true);
         }
 
         [TestMethod]
@@ -63,26 +63,24 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void UpdatUser_NotAccoutant_ReturnNull()
+        [ExpectedException(typeof(UnauthorizedAccessException))]
+        public void UpdatUser_NotAccoutant()
         {
             SetUpTestLoanData();
 
             var accountantService = new AccountantService(_mockUserRepo.Object, _mockLoanRepo.Object, _mockLogger.Object);
-            var response = accountantService.UpdateUser(1, new UserAccountantDTO() { }, GetToken(isAccoutant: false), true);
-
-            Assert.IsNull(response);
+            accountantService.UpdateUser(1, new UserAccountantDTO() { }, GetToken(isAccoutant: false), true);
         }
 
 
         [TestMethod]
+        [ExpectedException(typeof(DataNotFoundException))]
         public void UpdateUser_UserNotFound_ReturnNotFound()
         {
             SetUpTestLoanData(isLoanNull: true);
 
             var accountantService = new AccountantService(_mockUserRepo.Object, _mockLoanRepo.Object, _mockLogger.Object);
-            var response = accountantService.UpdateUser(1, new UserAccountantDTO() { }, GetToken(), true);
-
-            Assert.AreEqual("notFound", response);
+            accountantService.UpdateUser(1, new UserAccountantDTO() { }, GetToken(), true);
         }
 
         private void SetUpTestLoanData(bool isLoanNull = false)

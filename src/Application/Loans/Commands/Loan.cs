@@ -1,8 +1,10 @@
 ﻿using Application.Loans.Validators;
 using Domain.DTO.Loan;
 using Domain.Interface;
+using Infrastructure.Exceptions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace Application.Loans.Commands
 {
@@ -27,58 +29,54 @@ namespace Application.Loans.Commands
                 return BadRequest(message);
             }
 
-            string authorizationHeader = HttpContext.Request.Headers["Authorization"];
-            var result = _loanService.RequestLoan(loanRequestDTO, authorizationHeader);
-
-            if (result == null)
+            try
             {
-                return Unauthorized("Invalid Token");
+                string authorizationHeader = HttpContext.Request.Headers["Authorization"];
+                _loanService.RequestLoan(loanRequestDTO, authorizationHeader);
+                return Ok("Loan requested successfully. our accountant will review your request as soon as possible");
             }
-
-            if (result == "Blocked")
+            catch (UserBlockedEcxeption ex)
             {
-                return Conflict("Your account is temporary blocked for new loan requests. please contact your accountant");
+                return Conflict(ex.Message);
             }
-
-            return Ok("Loan requested successfully. our accountant will review your request as soon as possible");
         }
 
         [HttpGet("GetByUserId/{id}")]
         public IActionResult GetLoansByUserId(int id)
         {
-            string authorizationHeader = HttpContext.Request.Headers["Authorization"];
-            var result = _loanService.GetLoansByUserId(id, authorizationHeader);
-
-            if (result == null)
+            try
             {
-                return Unauthorized("You dont have permission to retrieve these data");
+                string authorizationHeader = HttpContext.Request.Headers["Authorization"];
+                var result = _loanService.GetLoansByUserId(id, authorizationHeader);
+                return Ok(result);
             }
-
-            return Ok(result);
+            catch (UnauthorizedAccessException ex)
+            {
+                return Unauthorized(ex.Message);
+            }
         }
 
         [HttpDelete("Delete/{id}")]
         public IActionResult DeleteLoanById(int id)
         {
-            string authorizationHeader = HttpContext.Request.Headers["Authorization"];
-            var result = _loanService.DeleteLoanById(id, authorizationHeader);
-
-            if (result == null)
+            try
             {
-                return Unauthorized("You dont have permission to delete this loan");
+                string authorizationHeader = HttpContext.Request.Headers["Authorization"];
+                _loanService.DeleteLoanById(id, authorizationHeader);
+                return Ok("Loan deleted successfully");
             }
-
-            if (result == "notFound")
+            catch (UnauthorizedAccessException ex)
             {
-                return NotFound($"loan with id {id} not found in system");
+                return Unauthorized(ex.Message);
             }
-
-            if (result == "StatusFail")
+            catch (DataNotFoundException ex)
             {
-                return BadRequest("You cant delete confirmed or rejected loans");
+                return NotFound(ex.Message);
             }
-
-            return Ok("Loan deleted successfully");
+            catch (LoanStatusException ex)
+            {
+                return Conflict(ex.Message);
+            }
         }
 
         [HttpPut("Update/{id}")]
@@ -91,25 +89,24 @@ namespace Application.Loans.Commands
                 return BadRequest(message);
             }
 
-            string authorizationHeader = HttpContext.Request.Headers["Authorization"];
-            var result = _loanService.UpdateLoan(id, loanRequestDTO, authorizationHeader);
-
-            if (result == null)
+            try
             {
-                return Unauthorized("You dont have permission to update this loan");
+                string authorizationHeader = HttpContext.Request.Headers["Authorization"];
+                var result = _loanService.UpdateLoan(id, loanRequestDTO, authorizationHeader);
+                return Ok("Loan updated successfully");
             }
-
-            if (result == "notFound")
+            catch (UnauthorizedAccessException ex)
             {
-                return NotFound($"loan with id {id} not found in system");
+                return Unauthorized(ex.Message);
             }
-
-            if (result == "StatusFail")
+            catch (DataNotFoundException ex)
             {
-                return BadRequest("You cant update confirmed or rejected loans");
+                return NotFound(ex.Message);
             }
-
-            return Ok("Loan updated successfully");
+            catch (LoanStatusException ex)
+            {
+                return Conflict(ex.Message);
+            }
         }
     }
 }

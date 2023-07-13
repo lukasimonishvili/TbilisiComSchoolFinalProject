@@ -2,6 +2,7 @@
 using Domain.Entities;
 using Domain.Helpers;
 using Domain.Interface;
+using Infrastructure.Exceptions;
 using Infrastructure.Services;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
@@ -47,6 +48,7 @@ namespace UnitTests
         }
 
         [TestMethod]
+        [ExpectedException(typeof(WrongCredentialsException))]
         public void Authenticate_WrongUsername()
         {
             _mockUserRepository.Setup(mock => mock.GetUserByUsername(It.IsAny<string>())).Returns(new User()
@@ -68,12 +70,25 @@ namespace UnitTests
                 Username = "admin",
                 Password = "wrongPassword"
             });
-
-            Assert.IsNull(result);
         }
 
         [TestMethod]
+        [ExpectedException(typeof(WrongCredentialsException))]
         public void Authenticate_WrongPassword()
+        {
+            _mockUserRepository.Setup(mock => mock.GetUserByUsername(It.IsAny<string>())).Returns((User)null);
+
+            var loginService = new LoginService(_appSettings, _mockUserRepository.Object, _loggerMock.Object);
+            loginService.Authenticate(new LoginDTO()
+            {
+                Username = "wrongusername",
+                Password = "admin"
+            });
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(UserUnverifiedException))]
+        public void Authenticate_Unverified()
         {
             _mockUserRepository.Setup(mock => mock.GetUserByUsername(It.IsAny<string>())).Returns(new User()
             {
@@ -89,29 +104,14 @@ namespace UnitTests
             });
 
             var loginService = new LoginService(_appSettings, _mockUserRepository.Object, _loggerMock.Object);
-            var result = loginService.Authenticate(new LoginDTO()
+            loginService.Authenticate(new LoginDTO()
             {
                 Username = "admin",
                 Password = "admin"
             });
-
-            Assert.AreEqual("Unverified", result);
         }
 
-        [TestMethod]
-        public void Authenticate_Unverified()
-        {
-            _mockUserRepository.Setup(mock => mock.GetUserByUsername(It.IsAny<string>())).Returns((User)null);
 
-            var loginService = new LoginService(_appSettings, _mockUserRepository.Object, _loggerMock.Object);
-            var result = loginService.Authenticate(new LoginDTO()
-            {
-                Username = "wrongusername",
-                Password = "admin"
-            });
-
-            Assert.IsNull(result);
-        }
 
         [TestMethod]
         public void Refreshtoken_Success()
@@ -135,6 +135,7 @@ namespace UnitTests
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void Refreshtoken_InvalidToken()
         {
             _mockUserRepository.Setup(mock => mock.GetUserById(It.IsAny<int>())).Returns(new User()
@@ -150,9 +151,7 @@ namespace UnitTests
                 Verified = true
             });
             var loginService = new LoginService(_appSettings, _mockUserRepository.Object, _loggerMock.Object);
-            var result = loginService.RefreshToken("Invalid token");
-
-            Assert.IsNull(result);
+            loginService.RefreshToken("Invalid token");
         }
 
         [TestMethod]
@@ -178,6 +177,7 @@ namespace UnitTests
         }
 
         [TestMethod]
+        [ExpectedException(typeof(UnauthorizedAccessException))]
         public void GetUserById_Fail()
         {
             _mockUserRepository.Setup(mock => mock.GetUserById(It.IsAny<int>())).Returns(new User()
@@ -193,10 +193,7 @@ namespace UnitTests
                 Verified = true
             });
             var loginService = new LoginService(_appSettings, _mockUserRepository.Object, _loggerMock.Object);
-
-            var result = loginService.GetUserById(1, GetToken(false), true);
-
-            Assert.IsInstanceOfType<UserDTO>(result);
+            loginService.GetUserById(2, GetToken(false), true);
         }
 
 

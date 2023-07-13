@@ -1,7 +1,9 @@
 ﻿using Domain.DTO.Authentication;
 using Domain.Interface;
+using Infrastructure.Exceptions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace Application.Authentication.Commands
 {
@@ -21,53 +23,54 @@ namespace Application.Authentication.Commands
         [HttpPost("")]
         public IActionResult Authenticate([FromBody] LoginDTO loginDto)
         {
-            var result = _loginService.Authenticate(loginDto);
-
-            if (result == null)
+            try
             {
-                return Unauthorized("Wron username or password");
-            }
+                var result = _loginService.Authenticate(loginDto);
+                return Ok(result);
 
-            if (result == "Unverified")
+            }
+            catch (WrongCredentialsException ex)
             {
-                return Conflict("Please confirm email to finish registration");
+                return Conflict(ex.Message);
             }
-
-            return Ok(result);
+            catch (UserUnverifiedException ex)
+            {
+                return Conflict(ex.Message);
+            }
         }
 
         [AllowAnonymous]
         [HttpPost("/api/refresh-token")]
         public IActionResult RefreshToken([FromBody] RefreshTokenDTO data)
         {
-            var refreshToken = _loginService.RefreshToken(data.Token);
-
-            if (refreshToken == null)
+            try
+            {
+                var refreshToken = _loginService.RefreshToken(data.Token);
+                return Ok(refreshToken);
+            }
+            catch (ArgumentException)
             {
                 return Unauthorized("Invalid Token Detected");
             }
-
-            if (refreshToken == "Valid")
+            catch (TokenNotExpiredException ex)
             {
-                return Conflict("Token is not expired.");
+                return Conflict(ex.Message);
             }
-
-            return Ok(refreshToken);
         }
 
         [HttpGet("/api/GetUserById/{id}")]
         public IActionResult GetUserById(int id)
         {
-            string authorizationHeader = HttpContext.Request.Headers["Authorization"];
-            var result = _loginService.GetUserById(id, authorizationHeader);
-
-            if (result == null)
+            try
             {
-                return Unauthorized("You dont have permission to retrieve this data");
-
+                string authorizationHeader = HttpContext.Request.Headers["Authorization"];
+                var result = _loginService.GetUserById(id, authorizationHeader);
+                return Ok(result);
             }
-
-            return Ok(result);
+            catch (UnauthorizedAccessException ex)
+            {
+                return Unauthorized(ex.Message);
+            }
         }
     }
 }

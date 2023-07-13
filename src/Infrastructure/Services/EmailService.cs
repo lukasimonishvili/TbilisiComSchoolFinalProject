@@ -17,34 +17,30 @@ namespace Infrastructure.Services
 
         public async Task<string> SenEmail(string EmailAddress, string Username, string url)
         {
-            try
+
+            var mailMessage = new MailMessage();
+            mailMessage.From = new MailAddress(_appSettings.Mailer.Sender);
+            mailMessage.To.Add(new MailAddress(EmailAddress));
+            mailMessage.Subject = "Register confirmation";
+            mailMessage.Body = $"<h1>Thank you dear {Username}!</h1>" +
+                          "<p>You are 1 step close to finish registration process</P>" +
+                          "<p>To finish up registration please follow link bellow</p>" +
+                          $"<a href='{url}'>Click Here</a>";
+            mailMessage.IsBodyHtml = true;
+
+            var client = new SmtpClient(_appSettings.Mailer.Host)
             {
-                var mailMessage = new MailMessage();
-                mailMessage.From = new MailAddress(_appSettings.Mailer.Sender);
-                mailMessage.To.Add(new MailAddress(EmailAddress));
-                mailMessage.Subject = "Register confirmation";
-                mailMessage.Body = $"<h1>Thank you dear {Username}!</h1>" +
-                              "<p>You are 1 step close to finish registration process</P>" +
-                              "<p>To finish up registration please follow link bellow</p>" +
-                              $"<a href='{url}'>Click Here</a>";
-                mailMessage.IsBodyHtml = true;
+                Port = _appSettings.Mailer.Port,
+                EnableSsl = true,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(_appSettings.Mailer.Sender, _appSettings.Mailer.Password)
+            };
 
-                var client = new SmtpClient(_appSettings.Mailer.Host)
-                {
-                    Port = _appSettings.Mailer.Port,
-                    EnableSsl = true,
-                    UseDefaultCredentials = false,
-                    Credentials = new NetworkCredential(_appSettings.Mailer.Sender, _appSettings.Mailer.Password)
-                };
+            await client.SendMailAsync(mailMessage);
+            return "success";
 
-                await client.SendMailAsync(mailMessage);
-                return "success";
-            }
-            catch (SmtpException)
-            {
+            //catch (SmtpException)
 
-                return null;
-            }
         }
     }
 }

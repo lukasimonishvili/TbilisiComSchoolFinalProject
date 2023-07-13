@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Threading.Tasks;
+using Infrastructure.Exceptions;
 
 namespace UnitTests
 {
@@ -39,6 +40,7 @@ namespace UnitTests
         }
 
         [TestMethod]
+        [ExpectedException(typeof(UserExistsException))]
         public async Task RegisterUser_MailConflict()
         {
             _mockUserRepository.Setup(mock => mock.GetUserByEmail(It.IsAny<string>())).Returns(new User() { Email = "test@gmail.com" });
@@ -47,7 +49,7 @@ namespace UnitTests
             _mockEmailInterface.Setup(mock => mock.SenEmail(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync("success");
 
             var registerService = new RegisterService(_mockEmailInterface.Object, _mockUserRepository.Object, _mockLogger.Object);
-            var result = await registerService.RegisterUser(
+            await registerService.RegisterUser(
                 new RegisterDTO()
                 {
                     Username = "testuser",
@@ -56,11 +58,10 @@ namespace UnitTests
                 },
                 "https://randomurl.com"
             );
-
-            Assert.AreEqual("EmailConflict", result);
         }
 
         [TestMethod]
+        [ExpectedException(typeof(UserExistsException))]
         public async Task RegisterUser_UsernameConflict()
         {
             _mockUserRepository.Setup(mock => mock.GetUserByEmail(It.IsAny<string>())).Returns((User)null);
@@ -69,7 +70,7 @@ namespace UnitTests
             _mockEmailInterface.Setup(mock => mock.SenEmail(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync("success");
 
             var registerService = new RegisterService(_mockEmailInterface.Object, _mockUserRepository.Object, _mockLogger.Object);
-            var result = await registerService.RegisterUser(
+            await registerService.RegisterUser(
                 new RegisterDTO()
                 {
                     Username = "testuser",
@@ -78,30 +79,6 @@ namespace UnitTests
                 },
                 "https://randomurl.com"
             );
-
-            Assert.AreEqual("usernameConflict", result);
-        }
-
-        [TestMethod]
-        public async Task RegisterUser_MailSender_Error()
-        {
-            _mockUserRepository.Setup(mock => mock.GetUserByEmail(It.IsAny<string>())).Returns((User)null);
-            _mockUserRepository.Setup(mock => mock.GetUserByUsername(It.IsAny<string>())).Returns((User)null);
-            _mockUserRepository.Setup(mock => mock.AddUserToDataBase(It.IsAny<User>())).Returns(new User());
-            _mockEmailInterface.Setup(mock => mock.SenEmail(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync((string)null);
-
-            var registerService = new RegisterService(_mockEmailInterface.Object, _mockUserRepository.Object, _mockLogger.Object);
-            var result = await registerService.RegisterUser(
-                new RegisterDTO()
-                {
-                    Username = "testuser",
-                    Email = "test@gmail.com",
-                    Password = "password",
-                },
-                "https://randomurl.com"
-            );
-
-            Assert.AreEqual("senderError", result);
         }
 
         [TestMethod]
@@ -117,27 +94,25 @@ namespace UnitTests
         }
 
         [TestMethod]
+        [ExpectedException(typeof(DataNotFoundException))]
         public void ActivateUser_NotFound()
         {
             var registerService = new RegisterService(_mockEmailInterface.Object, _mockUserRepository.Object, _mockLogger.Object);
             _mockUserRepository.Setup(mock => mock.GetUserByEmail(It.IsAny<string>())).Returns((User)null);
             _mockUserRepository.Setup(mock => mock.UpdateUser(It.IsAny<User>())).Returns("success");
 
-            var result = registerService.ActivateUser("test@gmail.com");
-
-            Assert.AreEqual("notFound", result);
+            registerService.ActivateUser("test@gmail.com");
         }
 
         [TestMethod]
+        [ExpectedException(typeof(UserIsAlreadyVerifiedException))]
         public void ActivateUser_AlreadyVerified()
         {
             var registerService = new RegisterService(_mockEmailInterface.Object, _mockUserRepository.Object, _mockLogger.Object);
             _mockUserRepository.Setup(mock => mock.GetUserByEmail(It.IsAny<string>())).Returns(new User() { Email = "test@gmail.com", Verified = true });
             _mockUserRepository.Setup(mock => mock.UpdateUser(It.IsAny<User>())).Returns("success");
 
-            var result = registerService.ActivateUser("test@gmail.com");
-
-            Assert.AreEqual("Verified", result);
+            registerService.ActivateUser("test@gmail.com");
         }
     }
 }

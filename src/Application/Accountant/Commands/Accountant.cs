@@ -2,8 +2,10 @@
 using Domain.DTO.Authentication;
 using Domain.DTO.Loan;
 using Domain.Interface;
+using Infrastructure.Exceptions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace Application.Accountant.Commands
 {
@@ -28,20 +30,20 @@ namespace Application.Accountant.Commands
                 var message = validator.Errors.Count > 1 ? "More then 1 validation error detected" : validator.Errors[0].ErrorMessage;
                 return BadRequest(message);
             }
-            string authorizationHeader = HttpContext.Request.Headers["Authorization"];
-            var result = _accountantService.UpdateUser(id, userDto, authorizationHeader);
-
-            if (result == null)
+            try
             {
-                return Unauthorized("Permision denied");
+                string authorizationHeader = HttpContext.Request.Headers["Authorization"];
+                var result = _accountantService.UpdateUser(id, userDto, authorizationHeader);
+                return Ok("User updated successfully");
             }
-
-            if (result == "notFound")
+            catch (UnauthorizedAccessException ex)
             {
-                return NotFound($"user with id {id} not found in system");
+                return Unauthorized(ex.Message);
             }
-
-            return Ok("User updated successfully");
+            catch (DataNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
 
         [HttpPost("UpdateLoan/{id}")]
@@ -54,20 +56,21 @@ namespace Application.Accountant.Commands
                 return BadRequest(message);
             }
 
-            string authorizationHeader = HttpContext.Request.Headers["Authorization"];
-            var result = _accountantService.UpdateLoan(id, loanDto, authorizationHeader);
-
-            if (result == null)
+            try
             {
-                return Unauthorized("Permision denied");
-            }
+                string authorizationHeader = HttpContext.Request.Headers["Authorization"];
+                _accountantService.UpdateLoan(id, loanDto, authorizationHeader);
+                return Ok("Loan updated successfully");
 
-            if (result == "notFound")
+            }
+            catch (UnauthorizedAccessException ex)
             {
-                return NotFound($"loan with id {id} not found in system");
+                return Unauthorized(ex.Message);
             }
-
-            return Ok("Loan updated successfully");
+            catch (DataNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
     }
 }

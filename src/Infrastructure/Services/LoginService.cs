@@ -12,6 +12,7 @@ using Domain.Helpers;
 using System.Linq;
 using Microsoft.Extensions.Logging;
 using Mapster;
+using Infrastructure.Exceptions;
 
 namespace Infrastructure.Services
 {
@@ -35,19 +36,19 @@ namespace Infrastructure.Services
             if (user == null)
             {
                 _logger.LogInformation("Attempted to authenticate with incorrect username");
-                return null;
+                throw new WrongCredentialsException();
             }
 
             if (!BCryptNet.Verify(login.Password, user.Password))
             {
                 _logger.LogWarning($"attemt to authenticate with username {login.Username} failed because of wrong password");
-                return null;
+                throw new WrongCredentialsException();
             }
 
             if (!user.Verified)
             {
                 _logger.LogInformation($"Unverified user with id {user.Id} tried to authenticate");
-                return "Unverified";
+                throw new UserUnverifiedException();
             }
 
             _logger.LogInformation($"user with username {login.Username} successfully authenticated");
@@ -79,28 +80,19 @@ namespace Infrastructure.Services
 
         public string RefreshToken(string tokenString)
         {
-            try
-            {
-                var tokenHandler = new JwtSecurityTokenHandler();
-                var token = tokenHandler.ReadJwtToken(tokenString);
-                var uniqueNameClaim = token.Claims.FirstOrDefault(claim => claim.Type == "unique_name");
 
-                if (DateTime.UtcNow > token.ValidTo)
-                {
-                    return "Valid";
-                }
-                else
-                {
-                    var userDB = _userRepository.GetUserById(Convert.ToInt32(uniqueNameClaim.Value));
-                    return GenerateToken(userDB);
-                }
-            }
-            catch (ArgumentException ex)
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var token = tokenHandler.ReadJwtToken(tokenString);
+            var uniqueNameClaim = token.Claims.FirstOrDefault(claim => claim.Type == "unique_name");
+
+            if (DateTime.UtcNow > token.ValidTo)
             {
-                _logger.LogError(ex.Message);
-                _logger.LogError(ex.StackTrace);
-                return null;
+                throw new TokenNotExpiredException();
             }
+
+            var userDB = _userRepository.GetUserById(Convert.ToInt32(uniqueNameClaim.Value));
+            return GenerateToken(userDB);
+
         }
 
         public UserDTO GetUserById(int userId, string authorizationHeader, bool IsTest = false)
@@ -114,11 +106,10 @@ namespace Infrastructure.Services
             if (roleClaim.Value == Roles.User && Convert.ToInt32(uniqueNameClaim.Value) != userId)
             {
                 _logger.LogWarning($"user with Id {uniqueNameClaim.Value} attempted to access information about user with id {userId}");
-                return null;
+                throw new UnauthorizedAccessException("You dont have permission to retrieve this data");
             }
 
             var user = _userRepository.GetUserById(userId);
-
             _logger.LogInformation($"data abaout user with id {userId} retrieved by user with id {uniqueNameClaim.Value}");
             return _userRepository.GetUserById(userId).Adapt<UserDTO>();
         }

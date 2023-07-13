@@ -1,11 +1,13 @@
 ﻿using Domain.DTO.Loan;
 using Domain.Entities;
 using Domain.Interface;
+using Infrastructure.Exceptions;
 using Infrastructure.Services;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -52,7 +54,8 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void DeleteLoanById_Result_isNull_noPermision()
+        [ExpectedException(typeof(UnauthorizedAccessException))]
+        public void DeleteLoanById_Result_noPermision()
         {
             _mockLoanRepo.Setup(mock => mock.GetLoanById(It.IsAny<int>())).Returns(new Loan()
             {
@@ -62,23 +65,21 @@ namespace UnitTests
             });
 
             var loanService = new LoanService(_mockLoanRepo.Object, _mockLogger.Object);
-            var response = loanService.DeleteLoanById(1, GetToken(isAccoutant: false), true);
-
-            Assert.IsNull(response);
+            loanService.DeleteLoanById(1, GetToken(isAccoutant: false), true);
         }
 
         [TestMethod]
+        [ExpectedException(typeof(DataNotFoundException))]
         public void DeleteLoanById_Loan_Not_Found_User()
         {
             _mockLoanRepo.Setup(mock => mock.GetLoanById(It.IsAny<int>())).Returns((Loan)null);
 
             var loanService = new LoanService(_mockLoanRepo.Object, _mockLogger.Object);
-            var response = loanService.DeleteLoanById(1, GetToken(isAccoutant: false), true);
-
-            Assert.AreEqual("notFound", response);
+            loanService.DeleteLoanById(1, GetToken(isAccoutant: false), true);
         }
 
         [TestMethod]
+        [ExpectedException(typeof(LoanStatusException))]
         public void DeleteLoanById_StatusFail()
         {
             _mockLoanRepo.Setup(mock => mock.GetLoanById(It.IsAny<int>())).Returns(new Loan()
@@ -89,9 +90,7 @@ namespace UnitTests
             });
 
             var loanService = new LoanService(_mockLoanRepo.Object, _mockLogger.Object);
-            var response = loanService.DeleteLoanById(1, GetToken(isAccoutant: false), true);
-
-            Assert.AreEqual("StatusFail", response);
+            loanService.DeleteLoanById(1, GetToken(isAccoutant: false), true);
         }
 
         [TestMethod]
@@ -106,14 +105,13 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void GetLoansByUserId_Returns_Null()
+        [ExpectedException(typeof(UnauthorizedAccessException))]
+        public void GetLoansByUserId_Unauthorized()
         {
             _mockLoanRepo.Setup(mock => mock.GetLoansByUsrId(It.IsAny<int>())).Returns(new List<Loan>());
 
             var loanService = new LoanService(_mockLoanRepo.Object, _mockLogger.Object);
-            var response = loanService.GetLoansByUserId(2, GetToken(isAccoutant: false), true);
-
-            Assert.IsNull(response);
+            loanService.GetLoansByUserId(2, GetToken(isAccoutant: false), true);
         }
 
         [TestMethod]
@@ -126,21 +124,11 @@ namespace UnitTests
         }
 
         [TestMethod]
+        [ExpectedException(typeof(UserBlockedEcxeption))]
         public void RequestLoan_BlockedUser()
         {
             var loanService = new LoanService(_mockLoanRepo.Object, _mockLogger.Object);
-            var response = loanService.RequestLoan(new LoanRequestDTO(), GetToken(isAccoutant: false, isUserBlocked: true), true);
-
-            Assert.AreEqual("Blocked", response);
-        }
-
-        [TestMethod]
-        public void RequestLoan_InvalidToken()
-        {
-            var loanService = new LoanService(_mockLoanRepo.Object, _mockLogger.Object);
-            var response = loanService.RequestLoan(new LoanRequestDTO(), "Invalid token", true);
-
-            Assert.IsNull(response);
+            loanService.RequestLoan(new LoanRequestDTO(), GetToken(isAccoutant: false, isUserBlocked: true), true);
         }
 
 
@@ -178,7 +166,8 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void UpdateLoanById_Result_isNull_noPermision()
+        [ExpectedException(typeof(UnauthorizedAccessException))]
+        public void UpdateLoanById_Result_noPermision()
         {
             _mockLoanRepo.Setup(mock => mock.GetLoanById(It.IsAny<int>())).Returns(new Loan()
             {
@@ -188,23 +177,21 @@ namespace UnitTests
             });
 
             var loanService = new LoanService(_mockLoanRepo.Object, _mockLogger.Object);
-            var response = loanService.UpdateLoan(1, new LoanRequestDTO(), GetToken(isAccoutant: false), true);
-
-            Assert.IsNull(response);
+            loanService.UpdateLoan(1, new LoanRequestDTO(), GetToken(isAccoutant: false), true);
         }
 
         [TestMethod]
-        public void UpdateLoanById_Loan_Not_Found_User()
+        [ExpectedException(typeof(DataNotFoundException))]
+        public void UpdateLoanById_Loan_Not_Found()
         {
             _mockLoanRepo.Setup(mock => mock.GetLoanById(It.IsAny<int>())).Returns((Loan)null);
 
             var loanService = new LoanService(_mockLoanRepo.Object, _mockLogger.Object);
-            var response = loanService.UpdateLoan(1, new LoanRequestDTO(), GetToken(isAccoutant: false), true);
-
-            Assert.AreEqual("notFound", response);
+            loanService.UpdateLoan(1, new LoanRequestDTO(), GetToken(isAccoutant: false), true);
         }
 
         [TestMethod]
+        [ExpectedException(typeof(LoanStatusException))]
         public void UpdateLoanById_StatusFail()
         {
             _mockLoanRepo.Setup(mock => mock.GetLoanById(It.IsAny<int>())).Returns(new Loan()
@@ -215,9 +202,7 @@ namespace UnitTests
             });
 
             var loanService = new LoanService(_mockLoanRepo.Object, _mockLogger.Object);
-            var response = loanService.UpdateLoan(1, new LoanRequestDTO(), GetToken(isAccoutant: false), true);
-
-            Assert.AreEqual("statusFail", response);
+            loanService.UpdateLoan(1, new LoanRequestDTO(), GetToken(isAccoutant: false), true);
         }
 
         private string GetToken(bool isAccoutant = true, bool isUserBlocked = false)

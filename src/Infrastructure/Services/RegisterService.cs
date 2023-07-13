@@ -5,6 +5,7 @@ using Mapster;
 using Domain.Interface;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
+using Infrastructure.Exceptions;
 
 namespace Infrastructure.Services
 {
@@ -27,22 +28,17 @@ namespace Infrastructure.Services
             var userWithEmail = _userRepository.GetUserByEmail(registerDto.Email);
             if (userWithEmail != null)
             {
-                return "EmailConflict";
+                throw new UserExistsException($"user with email {registerDto.Email} already exists");
             }
 
             var userWithUsername = _userRepository.GetUserByUsername(registerDto.Username);
             if (userWithUsername != null)
             {
-                return "usernameConflict";
+                throw new UserExistsException($"user with username {registerDto.Username} already exists");
             }
 
             var emailSendUrl = url + registerDto.Email;
             var emailSent = await _emailInterface.SenEmail(registerDto.Email, registerDto.Username, emailSendUrl);
-
-            if (emailSent == null)
-            {
-                return "senderError";
-            }
 
             var AdapdetUser = registerDto.Adapt<User>();
             AdapdetUser.Password = BCryptNet.HashPassword(AdapdetUser.Password);
@@ -59,12 +55,12 @@ namespace Infrastructure.Services
             var user = _userRepository.GetUserByEmail(Email);
             if (user == null)
             {
-                return "notFound";
+                throw new DataNotFoundException($"user with email {Email} not found in system");
             }
 
             if (user.Verified)
             {
-                return "Verified";
+                throw new UserIsAlreadyVerifiedException();
             }
 
             user.Verified = true;
