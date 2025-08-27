@@ -1,7 +1,7 @@
-﻿using BCryptNet = BCrypt.Net.BCrypt;
-using Domain.Entities;
+﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
+using BCryptNet = BCrypt.Net.BCrypt;
 
 namespace Infrastructure.Persistence
 {
@@ -31,8 +31,9 @@ namespace Infrastructure.Persistence
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(
-                "Server=localhost\\SQLEXPRESS;Database=LoanDB;Trusted_Connection=True;MultipleActiveResultSets=True"
+            optionsBuilder.UseMySql(
+                "Server=localhost;Port=3306;Database=LoanDB;User=root;Password=1998;",
+                ServerVersion.AutoDetect("Server=localhost;Port=3306;Database=LoanDB;User=root;Password=1998;")
             );
         }
     }

@@ -4267,3 +4267,244 @@ DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
 2023-07-13 20:31:07.9209|INFO|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Executed action Application.Accountant.Commands.Accountant.UpdateLoan (Application) in 333.697ms
 2023-07-13 20:31:07.9209|INFO|Microsoft.AspNetCore.Routing.EndpointMiddleware|Executed endpoint 'Application.Accountant.Commands.Accountant.UpdateLoan (Application)'
 2023-07-13 20:31:07.9287|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/1.1 POST https://localhost:44305/api/Accountant/UpdateLoan/2 application/json 108 - 200 - text/plain;+charset=utf-8 343.8025ms
+2025-08-27 12:14:55.2759|DEBUG|Microsoft.Extensions.Hosting.Internal.Host|Hosting starting
+2025-08-27 12:14:55.3966|INFO|Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager|User profile is available. Using 'C:\Users\simon\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-08-27 12:14:55.4280|DEBUG|Microsoft.AspNetCore.DataProtection.KeyManagement.DefaultKeyResolver|Repository contains no viable default key. Caller should generate a key with immediate activation.
+2025-08-27 12:14:55.4280|DEBUG|Microsoft.AspNetCore.DataProtection.KeyManagement.KeyRingProvider|Policy resolution states that a new key should be added to the key ring.
+2025-08-27 12:14:55.4280|INFO|Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager|Creating key {3a078743-c479-4cbc-a608-25073adb56a2} with creation date 2025-08-27 10:14:55Z, activation date 2025-08-27 10:14:55Z, and expiration date 2025-11-25 10:14:55Z.
+2025-08-27 12:14:55.4280|DEBUG|Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager|Descriptor deserializer type for key {3a078743-c479-4cbc-a608-25073adb56a2} is 'Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60'.
+2025-08-27 12:14:55.4489|DEBUG|Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager|No key escrow sink found. Not writing key {3a078743-c479-4cbc-a608-25073adb56a2} to escrow.
+2025-08-27 12:14:55.4768|DEBUG|Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlEncryptor|Encrypting to Windows DPAPI for current user account (DESKTOP-9AR1VLN\simon).
+2025-08-27 12:14:55.4768|INFO|Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository|Writing data to file 'C:\Users\simon\AppData\Local\ASP.NET\DataProtection-Keys\key-3a078743-c479-4cbc-a608-25073adb56a2.xml'.
+2025-08-27 12:14:55.4768|DEBUG|Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager|Key cache expiration token triggered by 'CreateNewKey' operation.
+2025-08-27 12:14:55.4921|DEBUG|Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository|Reading data from file 'C:\Users\simon\AppData\Local\ASP.NET\DataProtection-Keys\key-3a078743-c479-4cbc-a608-25073adb56a2.xml'.
+2025-08-27 12:14:55.5599|DEBUG|Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager|Found key {3a078743-c479-4cbc-a608-25073adb56a2}.
+2025-08-27 12:14:55.5683|DEBUG|Microsoft.AspNetCore.DataProtection.KeyManagement.DefaultKeyResolver|Considering key {3a078743-c479-4cbc-a608-25073adb56a2} with expiration date 2025-11-25 10:14:55Z as default key.
+2025-08-27 12:14:55.6640|DEBUG|Microsoft.AspNetCore.DataProtection.TypeForwardingActivator|Forwarded activator type request from Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2025-08-27 12:14:55.6640|DEBUG|Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor|Decrypting secret element using Windows DPAPI.
+2025-08-27 12:14:55.6640|DEBUG|Microsoft.AspNetCore.DataProtection.TypeForwardingActivator|Forwarded activator type request from Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2025-08-27 12:14:55.6640|DEBUG|Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.CngCbcAuthenticatedEncryptorFactory|Opening CNG algorithm 'AES' from provider '(null)' with chaining mode CBC.
+2025-08-27 12:14:55.6640|DEBUG|Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.CngCbcAuthenticatedEncryptorFactory|Opening CNG algorithm 'SHA256' from provider '(null)' with HMAC.
+2025-08-27 12:14:55.6768|DEBUG|Microsoft.AspNetCore.DataProtection.KeyManagement.KeyRingProvider|Using key {3a078743-c479-4cbc-a608-25073adb56a2} as the default key.
+2025-08-27 12:14:55.6768|DEBUG|Microsoft.AspNetCore.DataProtection.Internal.DataProtectionHostedService|Key ring with default key {3a078743-c479-4cbc-a608-25073adb56a2} was loaded during application startup.
+2025-08-27 12:14:58.9220|DEBUG|Microsoft.AspNetCore.Hosting.Diagnostics|Loaded hosting startup assembly Application
+2025-08-27 12:14:58.9430|DEBUG|Microsoft.AspNetCore.Hosting.Diagnostics|Loaded hosting startup assembly Microsoft.AspNetCore.Watch.BrowserRefresh
+2025-08-27 12:14:58.9430|DEBUG|Microsoft.AspNetCore.Hosting.Diagnostics|Loaded hosting startup assembly Microsoft.WebTools.BrowserLink.Net
+2025-08-27 12:14:58.9435|INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down.
+2025-08-27 12:14:58.9435|INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development
+2025-08-27 12:14:58.9435|INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\simon\Desktop\Coding\TbilisiComSchoolFinalProject\src\Application
+2025-08-27 12:14:58.9435|DEBUG|Microsoft.Extensions.Hosting.Internal.Host|Hosting started
+2025-08-27 12:14:59.0712|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/2 GET https://localhost:44305/swagger - -
+2025-08-27 12:14:59.9045|DEBUG|Microsoft.AspNetCore.HostFiltering.HostFilteringMiddleware|Wildcard detected, all requests with hosts will be allowed.
+2025-08-27 12:14:59.9045|TRACE|Microsoft.AspNetCore.HostFiltering.HostFilteringMiddleware|All hosts are allowed.
+2025-08-27 12:15:00.0130|DEBUG|Microsoft.AspNetCore.Server.IIS.Core.IISHttpServer|Connection ID "18230571310386249729" disconnecting.
+2025-08-27 12:15:00.0218|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/2 GET https://localhost:44305/swagger/index.html - -
+2025-08-27 12:15:00.0218|TRACE|Microsoft.AspNetCore.HostFiltering.HostFilteringMiddleware|All hosts are allowed.
+2025-08-27 12:15:00.0552|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/2 GET https://localhost:44305/swagger - - - 301 - - 962.8301ms
+2025-08-27 12:15:00.1413|DEBUG|Microsoft.WebTools.BrowserLink.Net.BrowserLinkMiddleware|Response markup is scheduled to include Browser Link script injection.
+2025-08-27 12:15:00.1413|DEBUG|Microsoft.AspNetCore.Watch.BrowserRefresh.BrowserRefreshMiddleware|Response markup is scheduled to include browser refresh script injection.
+2025-08-27 12:15:00.1740|DEBUG|Microsoft.WebTools.BrowserLink.Net.BrowserLinkMiddleware|Response markup was updated to include Browser Link script injection.
+2025-08-27 12:15:00.1740|DEBUG|Microsoft.AspNetCore.Watch.BrowserRefresh.BrowserRefreshMiddleware|Response markup was updated to include browser refresh script injection.
+2025-08-27 12:15:00.1740|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/2 GET https://localhost:44305/swagger/index.html - - - 200 - text/html;charset=utf-8 153.5297ms
+2025-08-27 12:15:00.1740|DEBUG|Microsoft.AspNetCore.Server.IIS.Core.IISHttpServer|Connection ID "18302628908719144961" disconnecting.
+2025-08-27 12:15:00.4206|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/2 GET https://localhost:44305/swagger/swagger-ui.css - -
+2025-08-27 12:15:00.4206|TRACE|Microsoft.AspNetCore.HostFiltering.HostFilteringMiddleware|All hosts are allowed.
+2025-08-27 12:15:00.4206|TRACE|Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware|Range header's value is empty.
+2025-08-27 12:15:00.4453|INFO|Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware|Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2025-08-27 12:15:00.4453|DEBUG|Microsoft.AspNetCore.Server.IIS.Core.IISHttpServer|Connection ID "18230571306091282433" disconnecting.
+2025-08-27 12:15:00.4453|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/2 GET https://localhost:44305/swagger/swagger-ui.css - - - 200 142933 text/css 28.7853ms
+2025-08-27 12:15:00.5132|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/2 GET https://localhost:44305/swagger/swagger-ui-bundle.js - -
+2025-08-27 12:15:00.5132|TRACE|Microsoft.AspNetCore.HostFiltering.HostFilteringMiddleware|All hosts are allowed.
+2025-08-27 12:15:00.5132|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/2 GET https://localhost:44305/swagger/swagger-ui-standalone-preset.js - -
+2025-08-27 12:15:00.5132|TRACE|Microsoft.AspNetCore.HostFiltering.HostFilteringMiddleware|All hosts are allowed.
+2025-08-27 12:15:00.5132|TRACE|Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware|Range header's value is empty.
+2025-08-27 12:15:00.5132|TRACE|Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware|Range header's value is empty.
+2025-08-27 12:15:00.5267|INFO|Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware|Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2025-08-27 12:15:00.5267|INFO|Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware|Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2025-08-27 12:15:00.5365|DEBUG|Microsoft.AspNetCore.Server.IIS.Core.IISHttpServer|Connection ID "18374686511347007489" disconnecting.
+2025-08-27 12:15:00.5365|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/2 GET https://localhost:44305/swagger/swagger-ui-standalone-preset.js - - - 200 311804 application/javascript 23.1486ms
+2025-08-27 12:15:00.5539|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/2 GET https://localhost:44305/_framework/aspnetcore-browser-refresh.js - -
+2025-08-27 12:15:00.5539|DEBUG|Microsoft.AspNetCore.Server.IIS.Core.IISHttpServer|Connection ID "18230571306091282435" disconnecting.
+2025-08-27 12:15:00.5539|DEBUG|Microsoft.AspNetCore.Server.IIS.Core.IISHttpServer|Connection ID "18230571310386249731" disconnecting.
+2025-08-27 12:15:00.5539|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/2 GET https://localhost:44305/swagger/swagger-ui-bundle.js - - - 200 986342 application/javascript 47.8558ms
+2025-08-27 12:15:00.5539|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/2 GET https://localhost:44305/_framework/aspnetcore-browser-refresh.js - - - 200 12354 application/javascript;+charset=utf-8 7.1672ms
+2025-08-27 12:15:00.5906|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/2 GET https://localhost:44305/_vs/browserLink - -
+2025-08-27 12:15:00.7940|DEBUG|Microsoft.AspNetCore.Server.IIS.Core.IISHttpServer|Connection ID "18230571310386249733" disconnecting.
+2025-08-27 12:15:00.7940|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/2 GET https://localhost:44305/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 203.7078ms
+2025-08-27 12:15:01.7338|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/2 GET https://localhost:44305/swagger/v1/swagger.json - -
+2025-08-27 12:15:01.7338|TRACE|Microsoft.AspNetCore.HostFiltering.HostFilteringMiddleware|All hosts are allowed.
+2025-08-27 12:15:01.9521|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/2 GET https://localhost:44305/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 218.2971ms
+2025-08-27 12:15:01.9521|DEBUG|Microsoft.AspNetCore.Server.IIS.Core.IISHttpServer|Connection ID "18374686511347007491" disconnecting.
+2025-08-27 12:15:01.9618|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/2 GET https://localhost:44305/swagger/favicon-32x32.png - -
+2025-08-27 12:15:01.9618|TRACE|Microsoft.AspNetCore.HostFiltering.HostFilteringMiddleware|All hosts are allowed.
+2025-08-27 12:15:01.9618|TRACE|Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware|Range header's value is empty.
+2025-08-27 12:15:01.9618|INFO|Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware|Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2025-08-27 12:15:01.9618|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/2 GET https://localhost:44305/swagger/favicon-32x32.png - - - 200 628 image/png 5.5130ms
+2025-08-27 12:31:19.3553|DEBUG|Microsoft.Extensions.Hosting.Internal.Host|Hosting starting
+2025-08-27 12:31:19.4612|INFO|Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager|User profile is available. Using 'C:\Users\simon\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-08-27 12:31:19.4755|DEBUG|Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository|Reading data from file 'C:\Users\simon\AppData\Local\ASP.NET\DataProtection-Keys\key-3a078743-c479-4cbc-a608-25073adb56a2.xml'.
+2025-08-27 12:31:19.4755|DEBUG|Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager|Found key {3a078743-c479-4cbc-a608-25073adb56a2}.
+2025-08-27 12:31:19.4985|DEBUG|Microsoft.AspNetCore.DataProtection.KeyManagement.DefaultKeyResolver|Considering key {3a078743-c479-4cbc-a608-25073adb56a2} with expiration date 2025-11-25 10:14:55Z as default key.
+2025-08-27 12:31:19.5639|DEBUG|Microsoft.AspNetCore.DataProtection.TypeForwardingActivator|Forwarded activator type request from Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2025-08-27 12:31:19.5639|DEBUG|Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor|Decrypting secret element using Windows DPAPI.
+2025-08-27 12:31:19.5639|DEBUG|Microsoft.AspNetCore.DataProtection.TypeForwardingActivator|Forwarded activator type request from Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2025-08-27 12:31:19.5688|DEBUG|Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.CngCbcAuthenticatedEncryptorFactory|Opening CNG algorithm 'AES' from provider '(null)' with chaining mode CBC.
+2025-08-27 12:31:19.5688|DEBUG|Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.CngCbcAuthenticatedEncryptorFactory|Opening CNG algorithm 'SHA256' from provider '(null)' with HMAC.
+2025-08-27 12:31:19.5688|DEBUG|Microsoft.AspNetCore.DataProtection.KeyManagement.KeyRingProvider|Using key {3a078743-c479-4cbc-a608-25073adb56a2} as the default key.
+2025-08-27 12:31:19.5688|DEBUG|Microsoft.AspNetCore.DataProtection.Internal.DataProtectionHostedService|Key ring with default key {3a078743-c479-4cbc-a608-25073adb56a2} was loaded during application startup.
+2025-08-27 12:31:19.8823|DEBUG|Microsoft.AspNetCore.Hosting.Diagnostics|Loaded hosting startup assembly Application
+2025-08-27 12:31:19.8823|DEBUG|Microsoft.AspNetCore.Hosting.Diagnostics|Loaded hosting startup assembly Microsoft.AspNetCore.Watch.BrowserRefresh
+2025-08-27 12:31:19.8823|DEBUG|Microsoft.AspNetCore.Hosting.Diagnostics|Loaded hosting startup assembly Microsoft.WebTools.BrowserLink.Net
+2025-08-27 12:31:19.8823|INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down.
+2025-08-27 12:31:19.8823|INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development
+2025-08-27 12:31:19.8823|INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\simon\Desktop\Coding\TbilisiComSchoolFinalProject\src\Application
+2025-08-27 12:31:19.8823|DEBUG|Microsoft.Extensions.Hosting.Internal.Host|Hosting started
+2025-08-27 12:31:19.9334|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/2 GET https://localhost:44305/swagger/index.html - -
+2025-08-27 12:31:20.1334|DEBUG|Microsoft.AspNetCore.HostFiltering.HostFilteringMiddleware|Wildcard detected, all requests with hosts will be allowed.
+2025-08-27 12:31:20.1334|TRACE|Microsoft.AspNetCore.HostFiltering.HostFilteringMiddleware|All hosts are allowed.
+2025-08-27 12:31:20.3407|DEBUG|Microsoft.WebTools.BrowserLink.Net.BrowserLinkMiddleware|Response markup is scheduled to include Browser Link script injection.
+2025-08-27 12:31:20.3407|DEBUG|Microsoft.AspNetCore.Watch.BrowserRefresh.BrowserRefreshMiddleware|Response markup is scheduled to include browser refresh script injection.
+2025-08-27 12:31:20.4235|DEBUG|Microsoft.WebTools.BrowserLink.Net.BrowserLinkMiddleware|Response markup was updated to include Browser Link script injection.
+2025-08-27 12:31:20.4235|DEBUG|Microsoft.AspNetCore.Watch.BrowserRefresh.BrowserRefreshMiddleware|Response markup was updated to include browser refresh script injection.
+2025-08-27 12:31:20.4336|DEBUG|Microsoft.AspNetCore.Server.IIS.Core.IISHttpServer|Connection ID "18302628913014112259" disconnecting.
+2025-08-27 12:31:20.4336|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/2 GET https://localhost:44305/swagger/index.html - - - 200 - text/html;charset=utf-8 505.5745ms
+2025-08-27 12:31:20.6790|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/2 GET https://localhost:44305/_framework/aspnetcore-browser-refresh.js - -
+2025-08-27 12:31:20.6790|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/2 GET https://localhost:44305/_vs/browserLink - -
+2025-08-27 12:31:20.6790|DEBUG|Microsoft.AspNetCore.Server.IIS.Core.IISHttpServer|Connection ID "18230571323271151617" disconnecting.
+2025-08-27 12:31:20.6790|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/2 GET https://localhost:44305/_framework/aspnetcore-browser-refresh.js - - - 200 12354 application/javascript;+charset=utf-8 12.4397ms
+2025-08-27 12:31:20.8209|DEBUG|Microsoft.AspNetCore.Server.IIS.Core.IISHttpServer|Connection ID "18158513729233223681" disconnecting.
+2025-08-27 12:31:20.8209|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/2 GET https://localhost:44305/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 142.4052ms
+2025-08-27 12:31:21.2440|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/2 GET https://localhost:44305/swagger/v1/swagger.json - -
+2025-08-27 12:31:21.2440|TRACE|Microsoft.AspNetCore.HostFiltering.HostFilteringMiddleware|All hosts are allowed.
+2025-08-27 12:31:21.5291|DEBUG|Microsoft.AspNetCore.Server.IIS.Core.IISHttpServer|Connection ID "18374686489872171010" disconnecting.
+2025-08-27 12:31:21.5291|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/2 GET https://localhost:44305/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 285.7331ms
+2025-08-27 13:00:50.0490|DEBUG|Microsoft.Extensions.Hosting.Internal.Host|Hosting starting
+2025-08-27 13:00:50.1416|INFO|Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager|User profile is available. Using 'C:\Users\simon\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-08-27 13:00:50.1558|DEBUG|Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository|Reading data from file 'C:\Users\simon\AppData\Local\ASP.NET\DataProtection-Keys\key-3a078743-c479-4cbc-a608-25073adb56a2.xml'.
+2025-08-27 13:00:50.1881|DEBUG|Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager|Found key {3a078743-c479-4cbc-a608-25073adb56a2}.
+2025-08-27 13:00:50.2070|DEBUG|Microsoft.AspNetCore.DataProtection.KeyManagement.DefaultKeyResolver|Considering key {3a078743-c479-4cbc-a608-25073adb56a2} with expiration date 2025-11-25 10:14:55Z as default key.
+2025-08-27 13:00:50.2699|DEBUG|Microsoft.AspNetCore.DataProtection.TypeForwardingActivator|Forwarded activator type request from Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2025-08-27 13:00:50.2746|DEBUG|Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor|Decrypting secret element using Windows DPAPI.
+2025-08-27 13:00:50.2746|DEBUG|Microsoft.AspNetCore.DataProtection.TypeForwardingActivator|Forwarded activator type request from Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2025-08-27 13:00:50.2746|DEBUG|Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.CngCbcAuthenticatedEncryptorFactory|Opening CNG algorithm 'AES' from provider '(null)' with chaining mode CBC.
+2025-08-27 13:00:50.2746|DEBUG|Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.CngCbcAuthenticatedEncryptorFactory|Opening CNG algorithm 'SHA256' from provider '(null)' with HMAC.
+2025-08-27 13:00:50.2746|DEBUG|Microsoft.AspNetCore.DataProtection.KeyManagement.KeyRingProvider|Using key {3a078743-c479-4cbc-a608-25073adb56a2} as the default key.
+2025-08-27 13:00:50.2885|DEBUG|Microsoft.AspNetCore.DataProtection.Internal.DataProtectionHostedService|Key ring with default key {3a078743-c479-4cbc-a608-25073adb56a2} was loaded during application startup.
+2025-08-27 13:00:50.5564|DEBUG|Microsoft.AspNetCore.Hosting.Diagnostics|Loaded hosting startup assembly Application
+2025-08-27 13:00:50.5564|DEBUG|Microsoft.AspNetCore.Hosting.Diagnostics|Loaded hosting startup assembly Microsoft.AspNetCore.Watch.BrowserRefresh
+2025-08-27 13:00:50.5564|DEBUG|Microsoft.AspNetCore.Hosting.Diagnostics|Loaded hosting startup assembly Microsoft.WebTools.BrowserLink.Net
+2025-08-27 13:00:50.5564|INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down.
+2025-08-27 13:00:50.5564|INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development
+2025-08-27 13:00:50.5564|INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\simon\Desktop\Coding\TbilisiComSchoolFinalProject\src\Application
+2025-08-27 13:00:50.5564|DEBUG|Microsoft.Extensions.Hosting.Internal.Host|Hosting started
+2025-08-27 13:00:50.6066|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/2 GET https://localhost:44305/swagger/index.html - -
+2025-08-27 13:00:50.7730|DEBUG|Microsoft.AspNetCore.HostFiltering.HostFilteringMiddleware|Wildcard detected, all requests with hosts will be allowed.
+2025-08-27 13:00:50.7730|TRACE|Microsoft.AspNetCore.HostFiltering.HostFilteringMiddleware|All hosts are allowed.
+2025-08-27 13:00:50.8590|DEBUG|Microsoft.WebTools.BrowserLink.Net.BrowserLinkMiddleware|Response markup is scheduled to include Browser Link script injection.
+2025-08-27 13:00:50.8590|DEBUG|Microsoft.AspNetCore.Watch.BrowserRefresh.BrowserRefreshMiddleware|Response markup is scheduled to include browser refresh script injection.
+2025-08-27 13:00:50.9115|DEBUG|Microsoft.WebTools.BrowserLink.Net.BrowserLinkMiddleware|Response markup was updated to include Browser Link script injection.
+2025-08-27 13:00:50.9115|DEBUG|Microsoft.AspNetCore.Watch.BrowserRefresh.BrowserRefreshMiddleware|Response markup was updated to include browser refresh script injection.
+2025-08-27 13:00:50.9115|DEBUG|Microsoft.AspNetCore.Server.IIS.Core.IISHttpServer|Connection ID "18302628913014112265" disconnecting.
+2025-08-27 13:00:50.9115|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/2 GET https://localhost:44305/swagger/index.html - - - 200 - text/html;charset=utf-8 316.8104ms
+2025-08-27 13:00:50.9853|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/2 GET https://localhost:44305/_framework/aspnetcore-browser-refresh.js - -
+2025-08-27 13:00:51.0033|DEBUG|Microsoft.AspNetCore.Server.IIS.Core.IISHttpServer|Connection ID "18302628913014112267" disconnecting.
+2025-08-27 13:00:51.0033|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/2 GET https://localhost:44305/_framework/aspnetcore-browser-refresh.js - - - 200 12354 application/javascript;+charset=utf-8 18.6741ms
+2025-08-27 13:00:51.0536|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/2 GET https://localhost:44305/_vs/browserLink - -
+2025-08-27 13:00:51.1199|DEBUG|Microsoft.AspNetCore.Server.IIS.Core.IISHttpServer|Connection ID "18302628913014112269" disconnecting.
+2025-08-27 13:00:51.1199|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/2 GET https://localhost:44305/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 66.5977ms
+2025-08-27 13:00:51.4988|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/2 GET https://localhost:44305/swagger/v1/swagger.json - -
+2025-08-27 13:00:51.4988|TRACE|Microsoft.AspNetCore.HostFiltering.HostFilteringMiddleware|All hosts are allowed.
+2025-08-27 13:00:51.7224|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/2 GET https://localhost:44305/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 223.5827ms
+2025-08-27 13:01:04.6718|DEBUG|Microsoft.Extensions.Hosting.Internal.Host|Hosting starting
+2025-08-27 13:01:04.7425|INFO|Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager|User profile is available. Using 'C:\Users\simon\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-08-27 13:01:04.7567|DEBUG|Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository|Reading data from file 'C:\Users\simon\AppData\Local\ASP.NET\DataProtection-Keys\key-3a078743-c479-4cbc-a608-25073adb56a2.xml'.
+2025-08-27 13:01:04.7567|DEBUG|Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager|Found key {3a078743-c479-4cbc-a608-25073adb56a2}.
+2025-08-27 13:01:04.7845|DEBUG|Microsoft.AspNetCore.DataProtection.KeyManagement.DefaultKeyResolver|Considering key {3a078743-c479-4cbc-a608-25073adb56a2} with expiration date 2025-11-25 10:14:55Z as default key.
+2025-08-27 13:01:04.8402|DEBUG|Microsoft.AspNetCore.DataProtection.TypeForwardingActivator|Forwarded activator type request from Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2025-08-27 13:01:04.8402|DEBUG|Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor|Decrypting secret element using Windows DPAPI.
+2025-08-27 13:01:04.8402|DEBUG|Microsoft.AspNetCore.DataProtection.TypeForwardingActivator|Forwarded activator type request from Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2025-08-27 13:01:04.8402|DEBUG|Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.CngCbcAuthenticatedEncryptorFactory|Opening CNG algorithm 'AES' from provider '(null)' with chaining mode CBC.
+2025-08-27 13:01:04.8402|DEBUG|Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.CngCbcAuthenticatedEncryptorFactory|Opening CNG algorithm 'SHA256' from provider '(null)' with HMAC.
+2025-08-27 13:01:04.8402|DEBUG|Microsoft.AspNetCore.DataProtection.KeyManagement.KeyRingProvider|Using key {3a078743-c479-4cbc-a608-25073adb56a2} as the default key.
+2025-08-27 13:01:04.8488|DEBUG|Microsoft.AspNetCore.DataProtection.Internal.DataProtectionHostedService|Key ring with default key {3a078743-c479-4cbc-a608-25073adb56a2} was loaded during application startup.
+2025-08-27 13:01:05.0977|DEBUG|Microsoft.AspNetCore.Hosting.Diagnostics|Loaded hosting startup assembly Application
+2025-08-27 13:01:05.0977|DEBUG|Microsoft.AspNetCore.Hosting.Diagnostics|Loaded hosting startup assembly Microsoft.AspNetCore.Watch.BrowserRefresh
+2025-08-27 13:01:05.0977|DEBUG|Microsoft.AspNetCore.Hosting.Diagnostics|Loaded hosting startup assembly Microsoft.WebTools.BrowserLink.Net
+2025-08-27 13:01:05.0977|INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down.
+2025-08-27 13:01:05.0977|INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development
+2025-08-27 13:01:05.0977|INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\simon\Desktop\Coding\TbilisiComSchoolFinalProject\src\Application
+2025-08-27 13:01:05.0977|DEBUG|Microsoft.Extensions.Hosting.Internal.Host|Hosting started
+2025-08-27 13:01:05.1361|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/2 GET https://localhost:44305/swagger/index.html - -
+2025-08-27 13:01:05.2627|DEBUG|Microsoft.AspNetCore.HostFiltering.HostFilteringMiddleware|Wildcard detected, all requests with hosts will be allowed.
+2025-08-27 13:01:05.2627|TRACE|Microsoft.AspNetCore.HostFiltering.HostFilteringMiddleware|All hosts are allowed.
+2025-08-27 13:01:05.3240|DEBUG|Microsoft.WebTools.BrowserLink.Net.BrowserLinkMiddleware|Response markup is scheduled to include Browser Link script injection.
+2025-08-27 13:01:05.3240|DEBUG|Microsoft.AspNetCore.Watch.BrowserRefresh.BrowserRefreshMiddleware|Response markup is scheduled to include browser refresh script injection.
+2025-08-27 13:01:05.3640|DEBUG|Microsoft.WebTools.BrowserLink.Net.BrowserLinkMiddleware|Response markup was updated to include Browser Link script injection.
+2025-08-27 13:01:05.3642|DEBUG|Microsoft.AspNetCore.Watch.BrowserRefresh.BrowserRefreshMiddleware|Response markup was updated to include browser refresh script injection.
+2025-08-27 13:01:05.3642|DEBUG|Microsoft.AspNetCore.Server.IIS.Core.IISHttpServer|Connection ID "18374686485577203714" disconnecting.
+2025-08-27 13:01:05.3811|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/2 GET https://localhost:44305/swagger/index.html - - - 200 - text/html;charset=utf-8 244.8323ms
+2025-08-27 13:01:05.3811|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/2 GET https://localhost:44305/_framework/aspnetcore-browser-refresh.js - -
+2025-08-27 13:01:05.3811|DEBUG|Microsoft.AspNetCore.Server.IIS.Core.IISHttpServer|Connection ID "18086456118015426561" disconnecting.
+2025-08-27 13:01:05.3811|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/2 GET https://localhost:44305/_framework/aspnetcore-browser-refresh.js - - - 200 12354 application/javascript;+charset=utf-8 7.5276ms
+2025-08-27 13:01:05.4874|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/2 GET https://localhost:44305/_vs/browserLink - -
+2025-08-27 13:01:05.5408|DEBUG|Microsoft.AspNetCore.Server.IIS.Core.IISHttpServer|Connection ID "18374686502757072900" disconnecting.
+2025-08-27 13:01:05.5408|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/2 GET https://localhost:44305/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 53.9625ms
+2025-08-27 13:01:05.8052|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/2 GET https://localhost:44305/swagger/v1/swagger.json - -
+2025-08-27 13:01:05.8052|TRACE|Microsoft.AspNetCore.HostFiltering.HostFilteringMiddleware|All hosts are allowed.
+2025-08-27 13:01:05.9392|DEBUG|Microsoft.AspNetCore.Server.IIS.Core.IISHttpServer|Connection ID "18230571310386249738" disconnecting.
+2025-08-27 13:01:05.9392|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/2 GET https://localhost:44305/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 133.9998ms
+2025-08-27 13:01:13.6775|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/2 GET https://localhost:44305/swagger/index.html - -
+2025-08-27 13:01:13.6927|TRACE|Microsoft.AspNetCore.HostFiltering.HostFilteringMiddleware|All hosts are allowed.
+2025-08-27 13:01:13.6927|DEBUG|Microsoft.WebTools.BrowserLink.Net.BrowserLinkMiddleware|Response markup is scheduled to include Browser Link script injection.
+2025-08-27 13:01:13.6927|DEBUG|Microsoft.AspNetCore.Watch.BrowserRefresh.BrowserRefreshMiddleware|Response markup is scheduled to include browser refresh script injection.
+2025-08-27 13:01:13.6927|DEBUG|Microsoft.WebTools.BrowserLink.Net.BrowserLinkMiddleware|Response markup was updated to include Browser Link script injection.
+2025-08-27 13:01:13.6927|DEBUG|Microsoft.AspNetCore.Watch.BrowserRefresh.BrowserRefreshMiddleware|Response markup was updated to include browser refresh script injection.
+2025-08-27 13:01:13.6927|DEBUG|Microsoft.AspNetCore.Server.IIS.Core.IISHttpServer|Connection ID "18230571301796315142" disconnecting.
+2025-08-27 13:01:13.6927|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/2 GET https://localhost:44305/swagger/index.html - - - 200 - text/html;charset=utf-8 18.0096ms
+2025-08-27 13:01:13.7793|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/2 GET https://localhost:44305/_framework/aspnetcore-browser-refresh.js - -
+2025-08-27 13:01:13.7793|DEBUG|Microsoft.AspNetCore.Server.IIS.Core.IISHttpServer|Connection ID "18374686502757072902" disconnecting.
+2025-08-27 13:01:13.7793|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/2 GET https://localhost:44305/_framework/aspnetcore-browser-refresh.js - - - 200 12354 application/javascript;+charset=utf-8 3.5144ms
+2025-08-27 13:01:13.8178|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/2 GET https://localhost:44305/_vs/browserLink - -
+2025-08-27 13:01:13.8553|DEBUG|Microsoft.AspNetCore.Server.IIS.Core.IISHttpServer|Connection ID "18230571310386249740" disconnecting.
+2025-08-27 13:01:13.8553|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/2 GET https://localhost:44305/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 37.6505ms
+2025-08-27 13:01:14.0879|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/2 GET https://localhost:44305/swagger/v1/swagger.json - -
+2025-08-27 13:01:14.0879|TRACE|Microsoft.AspNetCore.HostFiltering.HostFilteringMiddleware|All hosts are allowed.
+2025-08-27 13:01:14.0879|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/2 GET https://localhost:44305/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 5.2666ms
+2025-08-27 13:01:24.9580|DEBUG|Microsoft.Extensions.Hosting.Internal.Host|Hosting starting
+2025-08-27 13:01:25.0689|INFO|Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager|User profile is available. Using 'C:\Users\simon\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-08-27 13:01:25.0689|DEBUG|Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository|Reading data from file 'C:\Users\simon\AppData\Local\ASP.NET\DataProtection-Keys\key-3a078743-c479-4cbc-a608-25073adb56a2.xml'.
+2025-08-27 13:01:25.0910|DEBUG|Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager|Found key {3a078743-c479-4cbc-a608-25073adb56a2}.
+2025-08-27 13:01:25.1056|DEBUG|Microsoft.AspNetCore.DataProtection.KeyManagement.DefaultKeyResolver|Considering key {3a078743-c479-4cbc-a608-25073adb56a2} with expiration date 2025-11-25 10:14:55Z as default key.
+2025-08-27 13:01:25.1652|DEBUG|Microsoft.AspNetCore.DataProtection.TypeForwardingActivator|Forwarded activator type request from Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2025-08-27 13:01:25.1652|DEBUG|Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor|Decrypting secret element using Windows DPAPI.
+2025-08-27 13:01:25.1652|DEBUG|Microsoft.AspNetCore.DataProtection.TypeForwardingActivator|Forwarded activator type request from Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2025-08-27 13:01:25.1652|DEBUG|Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.CngCbcAuthenticatedEncryptorFactory|Opening CNG algorithm 'AES' from provider '(null)' with chaining mode CBC.
+2025-08-27 13:01:25.1773|DEBUG|Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.CngCbcAuthenticatedEncryptorFactory|Opening CNG algorithm 'SHA256' from provider '(null)' with HMAC.
+2025-08-27 13:01:25.1773|DEBUG|Microsoft.AspNetCore.DataProtection.KeyManagement.KeyRingProvider|Using key {3a078743-c479-4cbc-a608-25073adb56a2} as the default key.
+2025-08-27 13:01:25.1773|DEBUG|Microsoft.AspNetCore.DataProtection.Internal.DataProtectionHostedService|Key ring with default key {3a078743-c479-4cbc-a608-25073adb56a2} was loaded during application startup.
+2025-08-27 13:01:25.4078|DEBUG|Microsoft.AspNetCore.Hosting.Diagnostics|Loaded hosting startup assembly Application
+2025-08-27 13:01:25.4078|DEBUG|Microsoft.AspNetCore.Hosting.Diagnostics|Loaded hosting startup assembly Microsoft.AspNetCore.Watch.BrowserRefresh
+2025-08-27 13:01:25.4078|DEBUG|Microsoft.AspNetCore.Hosting.Diagnostics|Loaded hosting startup assembly Microsoft.WebTools.BrowserLink.Net
+2025-08-27 13:01:25.4078|INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down.
+2025-08-27 13:01:25.4078|INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development
+2025-08-27 13:01:25.4078|INFO|Microsoft.Hosting.Lifetime|Content root path: C:\Users\simon\Desktop\Coding\TbilisiComSchoolFinalProject\src\Application
+2025-08-27 13:01:25.4078|DEBUG|Microsoft.Extensions.Hosting.Internal.Host|Hosting started
+2025-08-27 13:01:25.4402|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/2 GET https://localhost:44305/swagger/index.html - -
+2025-08-27 13:01:25.5684|DEBUG|Microsoft.AspNetCore.HostFiltering.HostFilteringMiddleware|Wildcard detected, all requests with hosts will be allowed.
+2025-08-27 13:01:25.5684|TRACE|Microsoft.AspNetCore.HostFiltering.HostFilteringMiddleware|All hosts are allowed.
+2025-08-27 13:01:25.6394|DEBUG|Microsoft.WebTools.BrowserLink.Net.BrowserLinkMiddleware|Response markup is scheduled to include Browser Link script injection.
+2025-08-27 13:01:25.6394|DEBUG|Microsoft.AspNetCore.Watch.BrowserRefresh.BrowserRefreshMiddleware|Response markup is scheduled to include browser refresh script injection.
+2025-08-27 13:01:25.6784|DEBUG|Microsoft.WebTools.BrowserLink.Net.BrowserLinkMiddleware|Response markup was updated to include Browser Link script injection.
+2025-08-27 13:01:25.6784|DEBUG|Microsoft.AspNetCore.Watch.BrowserRefresh.BrowserRefreshMiddleware|Response markup was updated to include browser refresh script injection.
+2025-08-27 13:01:25.6784|DEBUG|Microsoft.AspNetCore.Server.IIS.Core.IISHttpServer|Connection ID "18302628908719144968" disconnecting.
+2025-08-27 13:01:25.6784|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/2 GET https://localhost:44305/swagger/index.html - - - 200 - text/html;charset=utf-8 251.4792ms
+2025-08-27 13:01:25.7123|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/2 GET https://localhost:44305/_framework/aspnetcore-browser-refresh.js - -
+2025-08-27 13:01:25.7251|DEBUG|Microsoft.AspNetCore.Server.IIS.Core.IISHttpServer|Connection ID "18302628908719144970" disconnecting.
+2025-08-27 13:01:25.7251|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/2 GET https://localhost:44305/_framework/aspnetcore-browser-refresh.js - - - 200 12354 application/javascript;+charset=utf-8 12.6638ms
+2025-08-27 13:01:25.7814|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/2 GET https://localhost:44305/_vs/browserLink - -
+2025-08-27 13:01:25.8246|DEBUG|Microsoft.AspNetCore.Server.IIS.Core.IISHttpServer|Connection ID "18374686507052040200" disconnecting.
+2025-08-27 13:01:25.8246|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/2 GET https://localhost:44305/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 43.5529ms
+2025-08-27 13:01:26.0455|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/2 GET https://localhost:44305/swagger/v1/swagger.json - -
+2025-08-27 13:01:26.0455|TRACE|Microsoft.AspNetCore.HostFiltering.HostFilteringMiddleware|All hosts are allowed.
+2025-08-27 13:01:26.1537|DEBUG|Microsoft.AspNetCore.Server.IIS.Core.IISHttpServer|Connection ID "18374686507052040202" disconnecting.
+2025-08-27 13:01:26.1537|INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/2 GET https://localhost:44305/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 108.2262ms

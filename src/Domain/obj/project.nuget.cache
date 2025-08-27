@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4j2UARKE2AvcB7UEDeUXZcZzGtbY0XPfNHyqd+1W5hOFVYb/n6U4wQoZAQoRed39GdWL59OeLGfej4byyUI9Kg==",
+  "dgSpecHash": "8TWV1PR3noc=",
   "success": true,
-  "projectFilePath": "C:\\Users\\simon\\Desktop\\work\\TbilisiSchoolFinalProject\\src\\Domain\\Domain.csproj",
+  "projectFilePath": "C:\\Users\\simon\\Desktop\\Coding\\TbilisiComSchoolFinalProject\\src\\Domain\\Domain.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\simon\\.nuget\\packages\\bcrypt.net\\0.1.0\\bcrypt.net.0.1.0.nupkg.sha512"
   ],
@@ -10,8 +10,10 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "warningLevel": 1,
       "message": "Package 'BCrypt.Net 0.1.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net5.0'. This package may not be fully compatible with your project.",
+      "projectPath": "C:\\Users\\simon\\Desktop\\Coding\\TbilisiComSchoolFinalProject\\src\\Domain\\Domain.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\simon\\Desktop\\Coding\\TbilisiComSchoolFinalProject\\src\\Domain\\Domain.csproj",
       "libraryId": "BCrypt.Net",
       "targetGraphs": [
         "net5.0"

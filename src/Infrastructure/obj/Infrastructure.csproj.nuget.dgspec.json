@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\simon\\Desktop\\work\\TbilisiSchoolFinalProject\\src\\Infrastructure\\Infrastructure.csproj": {}
+    "C:\\Users\\simon\\Desktop\\Coding\\TbilisiComSchoolFinalProject\\src\\Infrastructure\\Infrastructure.csproj": {}
   },
   "projects": {
-    "C:\\Users\\simon\\Desktop\\work\\TbilisiSchoolFinalProject\\src\\Domain\\Domain.csproj": {
+    "C:\\Users\\simon\\Desktop\\Coding\\TbilisiComSchoolFinalProject\\src\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\simon\\Desktop\\work\\TbilisiSchoolFinalProject\\src\\Domain\\Domain.csproj",
+        "projectUniqueName": "C:\\Users\\simon\\Desktop\\Coding\\TbilisiComSchoolFinalProject\\src\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "C:\\Users\\simon\\Desktop\\work\\TbilisiSchoolFinalProject\\src\\Domain\\Domain.csproj",
+        "projectPath": "C:\\Users\\simon\\Desktop\\Coding\\TbilisiComSchoolFinalProject\\src\\Domain\\Domain.csproj",
         "packagesPath": "C:\\Users\\simon\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\simon\\Desktop\\work\\TbilisiSchoolFinalProject\\src\\Domain\\obj\\",
+        "outputPath": "C:\\Users\\simon\\Desktop\\Coding\\TbilisiComSchoolFinalProject\\src\\Domain\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
           "C:\\Users\\simon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -34,7 +38,13 @@
           "warnAsError": [
             "NU1605"
           ]
-        }
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net5.0": {
@@ -61,21 +71,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\simon\\Desktop\\work\\TbilisiSchoolFinalProject\\src\\Infrastructure\\Infrastructure.csproj": {
+    "C:\\Users\\simon\\Desktop\\Coding\\TbilisiComSchoolFinalProject\\src\\Infrastructure\\Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\simon\\Desktop\\work\\TbilisiSchoolFinalProject\\src\\Infrastructure\\Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\simon\\Desktop\\Coding\\TbilisiComSchoolFinalProject\\src\\Infrastructure\\Infrastructure.csproj",
         "projectName": "Infrastructure",
-        "projectPath": "C:\\Users\\simon\\Desktop\\work\\TbilisiSchoolFinalProject\\src\\Infrastructure\\Infrastructure.csproj",
+        "projectPath": "C:\\Users\\simon\\Desktop\\Coding\\TbilisiComSchoolFinalProject\\src\\Infrastructure\\Infrastructure.csproj",
         "packagesPath": "C:\\Users\\simon\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\simon\\Desktop\\work\\TbilisiSchoolFinalProject\\src\\Infrastructure\\obj\\",
+        "outputPath": "C:\\Users\\simon\\Desktop\\Coding\\TbilisiComSchoolFinalProject\\src\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
           "C:\\Users\\simon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -89,8 +103,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\simon\\Desktop\\work\\TbilisiSchoolFinalProject\\src\\Domain\\Domain.csproj": {
-                "projectPath": "C:\\Users\\simon\\Desktop\\work\\TbilisiSchoolFinalProject\\src\\Domain\\Domain.csproj"
+              "C:\\Users\\simon\\Desktop\\Coding\\TbilisiComSchoolFinalProject\\src\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\Users\\simon\\Desktop\\Coding\\TbilisiComSchoolFinalProject\\src\\Domain\\Domain.csproj"
               }
             }
           }
@@ -99,7 +113,13 @@
           "warnAsError": [
             "NU1605"
           ]
-        }
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net5.0": {
@@ -116,6 +136,10 @@
             "Microsoft.EntityFrameworkCore.Tools": {
               "target": "Package",
               "version": "[5.0.0, )"
+            },
+            "Pomelo.EntityFrameworkCore.MySql": {
+              "target": "Package",
+              "version": "[5.0.4, )"
             }
           },
           "imports": [
@@ -134,7 +158,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304\\RuntimeIdentifierGraph.json"
         }
       }
     }
