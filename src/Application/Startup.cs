@@ -1,5 +1,7 @@
 using Domain.Helpers;
+using Domain.Interface;
 using Infrastructure.Maps;
+using Infrastructure.Repositories;
 using Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -11,10 +13,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using System.Text;
 using NLog.Extensions.Logging;
-using Domain.Interface;
-using Infrastructure.Repositories;
+using System.Text;
 
 namespace Application
 {
@@ -38,7 +38,15 @@ namespace Application
             });
 
             services.AddControllers();
-            services.AddCors();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAngularApp",
+                    builder => builder
+                        .WithOrigins("http://localhost:4200")
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials());
+            });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Application", Version = "v1" });
@@ -110,8 +118,8 @@ namespace Application
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors("AllowAngularApp");
             app.UseAuthentication();
-            app.UseAuthorization();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
